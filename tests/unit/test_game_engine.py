@@ -2,12 +2,12 @@ import json
 
 import pytest
 
-from src.cop_thief.services.entities import Cop, Thief
-from src.cop_thief.services.game_state import GameState
-from src.cop_thief.services.grid import Grid
-from src.cop_thief.services.move_validator import MoveValidator
-from src.cop_thief.services.score_manager import ScoreManager
-from src.cop_thief.shared.config_loader import ConfigLoader
+from cop_thief.services.entities import Cop, Thief
+from cop_thief.services.game_state import GameState
+from cop_thief.services.grid import Grid
+from cop_thief.services.move_validator import MoveValidator
+from cop_thief.services.score_manager import ScoreManager
+from cop_thief.shared.config_loader import ConfigLoader
 
 
 @pytest.fixture

@@ -1,5 +1,5 @@
-from src.cop_thief.services.entities import Entity
-from src.cop_thief.services.grid import Grid
+from cop_thief.services.entities import Entity
+from cop_thief.services.grid import Grid
 
 
 class MoveValidator:

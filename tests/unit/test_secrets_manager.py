@@ -3,7 +3,7 @@ from unittest.mock import patch
 
 import pytest
 
-from src.cop_thief.shared.secrets_manager import SecretsManager
+from cop_thief.shared.secrets_manager import SecretsManager
 
 
 def test_get_anthropic_key_missing():
@@ -27,7 +27,7 @@ def test_get_gmail_password_missing():
         assert "GMAIL_APP_PASSWORD is missing" in str(exc_info.value)
 
 
-@patch("src.cop_thief.shared.secrets_manager.load_dotenv")
+@patch("cop_thief.shared.secrets_manager.load_dotenv")
 def test_load_env_success(mock_load_dotenv):
     SecretsManager.load_env()
     mock_load_dotenv.assert_called_once()

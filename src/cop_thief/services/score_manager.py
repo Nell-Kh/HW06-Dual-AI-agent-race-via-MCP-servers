@@ -1,5 +1,5 @@
 
-from src.cop_thief.shared.config_loader import ConfigLoader
+from cop_thief.shared.config_loader import ConfigLoader
 
 
 class ScoreManager:
