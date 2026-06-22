@@ -12,4 +12,3 @@ __pycache__/
 .vscode/
 
 # Packages
-uv.lock
