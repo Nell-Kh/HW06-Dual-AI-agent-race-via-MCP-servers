@@ -35,5 +35,24 @@
     "timezone": "Asia/Jerusalem",
     "group_name": "YOUR_GROUP_NAME",
     "github_repo": "https://github.com/Nell-Kh/HW06-Dual-AI-agent-race-via-MCP-servers"
+  },
+  "vision_radius": 2,
+  "training": {
+    "enabled": true,
+    "num_episodes": 500,
+    "save_path": "results/q_table_trained.npy",
+    "log_path": "results/training_log.jsonl"
+  },
+  "personas": {
+    "cop": "You are Detective Marlowe, a relentless hard-boiled detective. You speak in short, determined sentences. You never give up.",
+    "thief": "You are The Shadow, a witty cat-burglar who always has a quip. You are cunning and unpredictable."
+  },
+  "cost_tracking": {
+    "enabled": true,
+    "log_path": "results/cost_report.json"
+  },
+  "replay": {
+    "enabled": true,
+    "output_path": "results/replay.html"
   }
 }

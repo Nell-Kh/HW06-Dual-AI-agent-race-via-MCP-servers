@@ -485,3 +485,32 @@
 - [x] Create local .env with actual key
 - [x] Update secrets_manager.py for OPENAI_API_KEY
 - [x] Update all tests for OpenAI configuration
+
+
+## Phase 9: Excellence Additions
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement PartialObserver.__init__()
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement PartialObserver.get_visible_state()
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement PartialObserver.generate_description()
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement TrainingEngine.__init__()
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement TrainingEngine.run_headless_games()
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement TrainingEngine.save_training_log()
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement CostTracker.__init__()
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement CostTracker.record_call()
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement CostTracker.get_totals()
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement CostTracker.save_report()
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement HTMLReplay.__init__()
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement HTMLReplay.add_frame()
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement HTMLReplay.generate_html()
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement SensitivityAnalyzer.__init__()
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement SensitivityAnalyzer.run_sweep()
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement SensitivityAnalyzer.generate_heatmap()
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement SensitivityAnalyzer.update_config()
+- [ ] [P1] [To Do] [Owner: AI Agent] Inject persona into LLM Cop prompt
+- [ ] [P1] [To Do] [Owner: AI Agent] Inject persona into LLM Thief prompt
+- [ ] [P1] [To Do] [Owner: AI Agent] Save transcript per move to results/transcript.jsonl
+- [ ] [P1] [To Do] [Owner: AI Agent] Validate new config keys in ConfigLoader
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test PartialObserver
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test TrainingEngine
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test CostTracker
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test HTMLReplay
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test SensitivityAnalyzer

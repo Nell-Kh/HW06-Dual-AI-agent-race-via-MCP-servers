@@ -50,3 +50,38 @@ To ensure all business logic is clean and accessible via a single interface, we 
 - **Decoupled LLM Logic**: The LLM queries are processed by the orchestrator rather than within the MCP servers. This ensures the MCP servers remain stateless execution nodes, drastically improving testability and adhering to best security practices.
 - **Config-Driven Operations**: Every constant (scores, sizes, ports, tokens, limits) is fetched from `config.json`. This completely eliminates hardcoding and ensures zero friction when hyperparameters change.
 - **Strict Size/Lint Rules**: Keeping files ≤ 150 lines forces extreme modularity and strict Single Responsibility Principle (SRP). `ruff` prevents anti-patterns before they commit.
+
+
+## 5. Excellence Features (Phase 9)
+
+### 1. PartialObserver
+Each agent has a `vision_radius` (default 2 from config). Agents only see cells within their radius. Outside radius = unknown. The `observe()` tool returns natural language describing only what is visible: "You are at center. You detect movement 2 steps east but cannot confirm position. There is a barrier to your south. Unknown territory to your north."
+
+### 2. TrainingEngine
+Runs N headless simulations (no LLM, heuristic only) BEFORE the real 6 LLM games, to pre-train the Q-Table. Saves trained table to `results/q_table_trained.npy`. Training results saved to `results/training_log.jsonl`.
+
+### 3. AgentPersona
+Each agent has a persona injected into LLM system prompt:
+- Cop: "You are Detective Marlowe, a relentless hard-boiled detective. You speak in short, determined sentences. You never give up."
+- Thief: "You are The Shadow, a witty cat-burglar who always has a quip. You are cunning and unpredictable."
+Every LLM response includes a dialogue field alongside the action. Dialogue saved to `results/transcript.jsonl`.
+
+### 4. CostTracker
+Tracks every OpenAI API call:
+- prompt tokens, completion tokens, total tokens
+- estimated cost in USD per call and cumulative
+- saves to `results/cost_report.json`
+
+### 5. HTMLReplay
+Generates `results/replay.html` after game ends:
+- visual 5x5 grid that replays game move by move
+- shows cop position, thief position, barriers
+- Play/Pause/Step buttons
+- shows agent dialogue next to grid for each move
+
+### 6. SensitivityAnalyzer
+In the research notebook:
+- sweeps learning_rate [0.01, 0.1, 0.3, 0.5] vs win_rate
+- sweeps discount_factor [0.7, 0.8, 0.9, 0.99] vs win_rate
+- generates heatmap of optimal hyperparameters
+- saves optimal params back to config.json
