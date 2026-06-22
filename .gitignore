@@ -1,0 +1,15 @@
+# Environments
+.env
+.venv
+__pycache__/
+
+# Keys
+*.key
+*.pem
+
+# IDE
+.idea/
+.vscode/
+
+# Packages
+uv.lock
