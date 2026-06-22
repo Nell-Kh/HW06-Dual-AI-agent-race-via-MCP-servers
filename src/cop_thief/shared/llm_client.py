@@ -11,14 +11,15 @@ class LLMClient:
         self.model = llm_config["model"]
         self.max_tokens = llm_config["max_tokens"]
         self.temperature = llm_config["temperature"]
+        self.config = config
+        personas = config.get_config().get("personas", {})
+        self.cop_persona = personas.get("cop", "You are Detective Marlowe, a relentless cop.")
+        self.thief_persona = personas.get("thief", "You are The Shadow, a cunning thief.")
 
     def _build_cop_prompt(
         self, observation: str, valid_moves: list[str], history: list[str]
     ) -> list[dict[str, str]]:
-        try:
-            persona = self.config._config.get("personas", {}).get("cop", "You are a cop.")
-        except Exception:
-            persona = "You are a cop."
+        persona = self.cop_persona
         sys_msg = (
             f"{persona} Respond with JSON containing 'action' (direction) and 'dialogue' (quip)."
         )
@@ -32,10 +33,7 @@ class LLMClient:
     def _build_thief_prompt(
         self, observation: str, valid_moves: list[str], history: list[str]
     ) -> list[dict[str, str]]:
-        try:
-            persona = self.config._config.get("personas", {}).get("thief", "You are a thief.")
-        except Exception:
-            persona = "You are a thief."
+        persona = self.thief_persona
         sys_msg = (
             f"{persona} Respond with JSON containing 'action' (direction) and 'dialogue' (quip)."
         )
@@ -100,10 +98,7 @@ class LLMClient:
         if barriers_remaining <= 0:
             return self.generate_move("cop", cop_observation, valid_moves, [])
 
-        try:
-            persona = self.config._config.get("personas", {}).get("cop", "You are a cop.")
-        except Exception:
-            persona = "You are a cop."
+        persona = self.cop_persona
         sys_msg = (
             f"{persona} "
             "Respond with JSON containing 'action' (direction or 'place_barrier') and 'dialogue'."

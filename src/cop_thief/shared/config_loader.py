@@ -60,6 +60,9 @@ class ConfigLoader:
         """Returns llm config dict."""
         return self._config["llm"]
 
+    def get_config(self) -> dict:
+        return self._config
+
     def get_report_config(self) -> dict[str, str]:
         """Returns report config dict."""
         return self._config["report"]
