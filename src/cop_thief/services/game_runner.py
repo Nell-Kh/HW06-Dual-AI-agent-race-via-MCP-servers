@@ -15,7 +15,7 @@ class GameRunner:
         self.config = ConfigLoader(config_path)
         self.config.load()
         self.secrets = SecretsManager()
-        self.gatekeeper = ApiGatekeeper()
+        self.gatekeeper = ApiGatekeeper(self.config)
         self.llm_client = LLMClient(self.config, self.secrets)
 
         self.score_manager = ScoreManager(self.config)

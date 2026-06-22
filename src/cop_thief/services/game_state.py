@@ -25,8 +25,8 @@ class GameState:
             cr, cc = random.randint(0, rows - 1), random.randint(0, cols - 1)
             tr, tc = random.randint(0, rows - 1), random.randint(0, cols - 1)
             if cr != tr or cc != tc:
-                self.cop.set_position(cr, cc)
-                self.thief.set_position(tr, tc)
+                self.cop.move(cr, cc)
+                self.thief.move(tr, tc)
                 break
 
     def is_capture(self) -> bool:

@@ -1,0 +1,2018 @@
+{
+  "totals": {
+    "total_calls": 251,
+    "total_prompt_tokens": 0,
+    "total_completion_tokens": 0,
+    "total_cost_usd": 0.0
+  },
+  "calls": [
+    {
+      "timestamp": 1782160717.514082,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160717.722476,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160717.909559,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160718.100211,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160718.308651,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160718.506449,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160718.716516,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160718.907232,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160719.1253278,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160719.3399549,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160719.534915,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160719.7258592,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160719.933724,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160720.14508,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160720.340894,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160720.5610418,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160720.7993422,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160721.025511,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160721.225141,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160721.431885,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160721.617602,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160721.815326,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160722.020041,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160722.4999459,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160722.696047,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160722.8858721,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160723.095593,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160723.295753,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160723.487423,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160723.70099,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160724.095145,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160724.28672,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160724.48993,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160724.678569,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160724.8710349,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160725.067416,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160725.2653298,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160725.469815,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160725.6594298,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160725.854744,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160726.050325,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160726.2439198,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160726.4327,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160726.7615309,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160726.952835,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160727.4746659,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160727.6704938,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160727.868621,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160728.07118,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160728.262166,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160728.4578938,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160728.661223,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160728.86324,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160729.054358,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160729.2446148,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160729.44168,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160729.63263,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160729.8408692,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160730.046207,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160730.251751,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160730.448382,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160730.648988,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160730.852245,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160731.037812,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160731.224779,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160731.417131,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160731.614604,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160731.7992861,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160732.006614,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160732.221416,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160732.4263868,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160732.708216,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160732.913551,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160733.1335108,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160733.320637,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160733.517726,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160733.719892,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160733.9162009,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160734.138505,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160734.3431702,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160734.546547,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160734.762392,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160734.952461,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160735.2032058,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160735.410681,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160735.691181,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160736.023315,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160736.2290292,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160736.4362218,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160736.6318452,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160736.834832,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160737.058491,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160737.264666,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160737.458501,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160737.650815,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160737.843094,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160738.048347,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160738.286263,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160738.49689,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160738.7217112,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160738.934457,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160739.12974,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160739.338995,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160739.627754,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160739.833954,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160740.060791,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160740.2601259,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160740.450751,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160740.654655,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160740.873357,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160741.0635562,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160741.256184,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160741.4526222,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160741.6568692,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160741.885438,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160742.155238,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160742.430702,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160742.6295831,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160742.842442,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160743.051971,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160743.2425148,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160743.470252,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160743.670625,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160743.8712661,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160744.0760891,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160744.292939,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160744.49027,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160744.678289,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160745.1494699,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160745.338186,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160745.56923,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160745.8463528,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160746.05932,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160746.330256,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160746.537458,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160746.7393658,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160746.957126,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160747.159563,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160747.348406,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160747.548003,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160747.741305,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160747.947937,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160748.1592371,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160748.443317,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160748.758332,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160748.959031,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160749.149875,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160749.347411,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160749.54059,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160749.7525408,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160749.975408,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160750.17646,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160750.37921,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160750.582648,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160750.775083,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160750.9890182,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160751.175391,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160751.43637,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160751.744087,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160751.935219,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160752.1436312,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160752.45942,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160752.664167,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160752.920226,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160753.422244,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160753.624864,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160753.818822,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160754.110805,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160754.338249,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160754.537499,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160754.8144798,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160755.005569,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160755.195489,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160755.38258,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160755.588004,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160755.8383648,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160756.0406778,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160756.230171,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160756.424781,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160756.633559,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160756.859536,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160757.0503402,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160757.245322,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160757.447981,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160757.647862,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160757.8505259,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160758.0650299,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160758.308352,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160758.57878,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160758.791502,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160758.991138,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160759.196814,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160759.3911731,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160759.712248,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160759.948534,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160760.1543272,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160760.359301,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160760.551208,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160760.766655,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160760.970925,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160761.174026,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160761.3818948,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160761.5819252,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160761.982503,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160762.185024,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160762.392302,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160762.598227,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160762.8030279,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160763.025687,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160763.243008,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160763.439897,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160763.723401,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160763.9125671,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160764.120781,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160764.3151202,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160764.630741,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160764.866239,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160765.0675552,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160765.27565,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160765.4829938,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160765.683501,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160765.991824,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160766.220035,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160766.488513,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160766.689118,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160766.893111,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160767.111339,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160767.298524,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160767.51208,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160767.700932,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160767.9105122,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160768.100204,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160768.293474,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160768.5052469,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160768.751742,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160768.955035,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160769.154805,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160769.3574872,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160769.548202,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160769.7438562,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160769.950337,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160770.1470761,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160770.3393762,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160770.592454,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160770.845828,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160771.07599,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160771.2788858,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160771.483725,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160771.692458,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160771.966557,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    },
+    {
+      "timestamp": 1782160772.287113,
+      "model": "gpt-4o-mini",
+      "prompt_tokens": 0,
+      "completion_tokens": 0,
+      "total_tokens": 0,
+      "cost_usd": 0.0
+    }
+  ]
+}

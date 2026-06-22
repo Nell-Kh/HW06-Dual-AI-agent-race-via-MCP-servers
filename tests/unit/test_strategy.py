@@ -130,8 +130,8 @@ def test_qtable_save_and_load(mock_config, tmp_path):
 
 def test_reward_capture_cop_positive(mock_config):
     gs = GameState(mock_config)
-    gs.cop.set_position(2, 2)
-    gs.thief.set_position(2, 2)
+    gs.cop.move(2, 2)
+    gs.thief.move(2, 2)
     rc = RewardCalculator(mock_config)
     assert rc.calculate_cop_reward(gs) == 20.0
     assert rc.calculate_thief_reward(gs) == -20.0
@@ -139,7 +139,7 @@ def test_reward_capture_cop_positive(mock_config):
 
 def test_reward_timeout_thief_positive(mock_config):
     gs = GameState(mock_config)
-    gs.thief.set_position(1, 1)
+    gs.thief.move(1, 1)
     gs.turn_count = 25
     rc = RewardCalculator(mock_config)
     assert rc.calculate_thief_reward(gs) == 10.0
@@ -148,7 +148,7 @@ def test_reward_timeout_thief_positive(mock_config):
 
 def test_reward_step_negative(mock_config):
     gs = GameState(mock_config)
-    gs.thief.set_position(1, 1)
+    gs.thief.move(1, 1)
     rc = RewardCalculator(mock_config)
     assert rc.calculate_cop_reward(gs) == -1.0
     assert rc.calculate_thief_reward(gs) == -1.0

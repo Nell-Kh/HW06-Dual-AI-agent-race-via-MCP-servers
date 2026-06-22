@@ -86,7 +86,7 @@ def test_cop_cannot_place_barrier_when_zero_remaining(mock_config):
     grid = Grid(mock_config)
     for _ in range(5):
         cop.place_barrier(grid)
-        cop.set_position(cop.row, cop.col + 1)
+        cop.move(cop.row, cop.col + 1)
     with pytest.raises(ValueError):
         cop.place_barrier(grid)
 
@@ -144,8 +144,8 @@ def test_score_manager_values_from_config(mock_config):
 
 def test_game_state_capture_detection(mock_config):
     gs = GameState(mock_config)
-    gs.cop.set_position(2, 2)
-    gs.thief.set_position(2, 2)
+    gs.cop.move(2, 2)
+    gs.thief.move(2, 2)
     assert gs.is_capture() is True
 
 

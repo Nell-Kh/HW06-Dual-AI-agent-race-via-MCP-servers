@@ -11,9 +11,10 @@ class Entity:
     def get_position(self) -> tuple[int, int]:
         return (self.row, self.col)
 
-    def set_position(self, row: int, col: int) -> None:
-        self.row = row
-        self.col = col
+    def move(self, new_row: int, new_col: int) -> None:
+        """Move entity to new position."""
+        self.row = new_row
+        self.col = new_col
 
 
 class Cop(Entity):

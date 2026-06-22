@@ -6,8 +6,10 @@ from dotenv import load_dotenv
 class SecretsManager:
     """Manages sensitive credentials and API keys via environment variables."""
 
-    @staticmethod
-    def load_env() -> None:
+    def __init__(self):
+        self.load_env()
+
+    def load_env(self) -> None:
         """Loads .env file via python-dotenv into os.environ."""
         load_dotenv()
 

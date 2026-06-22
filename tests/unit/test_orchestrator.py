@@ -98,7 +98,7 @@ def test_cop_wins_updates_score_correctly(mock_gs, mock_te):
     orch = Orchestrator(*deps)
     res = orch.run_sub_game(1)
 
-    score_mgr.update_scores.assert_called_with("cop")
+    score_mgr.record_cop_win.assert_called_once()
     assert res["winner"] == "cop"
 
 
@@ -121,7 +121,7 @@ def test_thief_wins_updates_score_correctly(mock_gs, mock_te):
     orch.execute_turn = MagicMock(return_value="up")
     res = orch.run_sub_game(1)
 
-    score_mgr.update_scores.assert_called_with("thief")
+    score_mgr.record_thief_win.assert_called_once()
     assert res["winner"] == "thief"
 
 

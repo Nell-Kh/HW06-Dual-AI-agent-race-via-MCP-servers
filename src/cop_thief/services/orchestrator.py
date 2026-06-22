@@ -69,7 +69,10 @@ class Orchestrator:
         if winner == "timeout":
             winner = "thief"
 
-        self.score_manager.update_scores(winner)
+        if winner == "cop":
+            self.score_manager.record_cop_win()
+        else:
+            self.score_manager.record_thief_win()
         return self._build_sub_game_result(sub_game_number, winner, moves)
 
     def execute_turn(

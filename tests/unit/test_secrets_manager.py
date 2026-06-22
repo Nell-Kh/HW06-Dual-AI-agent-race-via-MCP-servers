@@ -29,7 +29,7 @@ def test_get_gmail_password_missing():
 
 @patch("cop_thief.shared.secrets_manager.load_dotenv")
 def test_load_env_success(mock_load_dotenv):
-    SecretsManager.load_env()
+    SecretsManager()
     mock_load_dotenv.assert_called_once()
 
     with patch.dict(
