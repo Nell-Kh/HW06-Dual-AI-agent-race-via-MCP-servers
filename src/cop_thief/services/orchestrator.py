@@ -124,9 +124,11 @@ class Orchestrator:
         c_pos, t_pos = (game.cop.row, game.cop.col), (game.thief.row, game.thief.col)
         caught = c_pos == t_pos
         state_int_after = self.q_table.encode_state(c_pos, t_pos, g_sz)
-        self.q_table.update_bellman(
-            state_int_before, action, 10 if caught else -1, state_int_after, caught
-        )
+        # Only update Q-table for movement actions, not barrier placement
+        if action in ("up", "down", "left", "right"):
+            self.q_table.update_bellman(
+                state_int_before, action, 10 if caught else -1, state_int_after, caught
+            )
 
         return action
 
