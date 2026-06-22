@@ -13,38 +13,22 @@ def valid_config_file(tmp_path):
         "max_moves": 25,
         "num_games": 6,
         "max_barriers": 5,
-        "scoring": {
-            "cop_win": 20,
-            "thief_win": 10,
-            "cop_loss": 5,
-            "thief_loss": 5
-        },
-        "agents": {
-            "cop_start": "random",
-            "thief_start": "random"
-        },
+        "scoring": {"cop_win": 20, "thief_win": 10, "cop_loss": 5, "thief_loss": 5},
+        "agents": {"cop_start": "random", "thief_start": "random"},
         "llm": {
             "provider": "openai",
             "model": "gpt-4o-mini",
             "max_tokens": 1000,
-            "temperature": 0.7
+            "temperature": 0.7,
         },
-        "mcp": {
-            "cop_server_port": 8001,
-            "thief_server_port": 8002,
-            "host": "127.0.0.1"
-        },
-        "rl": {
-            "learning_rate": 0.1,
-            "discount_factor": 0.9,
-            "epsilon": 0.2
-        },
+        "mcp": {"cop_server_port": 8001, "thief_server_port": 8002, "host": "127.0.0.1"},
+        "rl": {"learning_rate": 0.1, "discount_factor": 0.9, "epsilon": 0.2},
         "report": {
             "recipient": "rmisegal+uoh26b@gmail.com",
             "timezone": "Asia/Jerusalem",
             "group_name": "YOUR_GROUP_NAME",
-            "github_repo": "https://github.com/Nell-Kh/HW06-Dual-AI-agent-race-via-MCP-servers"
-        }
+            "github_repo": "https://github.com/Nell-Kh/HW06-Dual-AI-agent-race-via-MCP-servers",
+        },
     }
     file_path = tmp_path / "config.json"
     with open(file_path, "w", encoding="utf-8") as f:

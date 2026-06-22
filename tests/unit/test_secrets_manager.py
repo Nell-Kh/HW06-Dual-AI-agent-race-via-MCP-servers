@@ -32,11 +32,15 @@ def test_load_env_success(mock_load_dotenv):
     SecretsManager.load_env()
     mock_load_dotenv.assert_called_once()
 
-    with patch.dict(os.environ, {
-        "OPENAI_API_KEY": "test_key",
-        "GMAIL_SENDER": "test@gmail.com",
-        "GMAIL_APP_PASSWORD": "test_password"
-    }, clear=True):
+    with patch.dict(
+        os.environ,
+        {
+            "OPENAI_API_KEY": "test_key",
+            "GMAIL_SENDER": "test@gmail.com",
+            "GMAIL_APP_PASSWORD": "test_password",
+        },
+        clear=True,
+    ):
         assert SecretsManager.get_openai_key() == "test_key"
         assert SecretsManager.get_gmail_sender() == "test@gmail.com"
         assert SecretsManager.get_gmail_password() == "test_password"

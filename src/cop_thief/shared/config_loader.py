@@ -72,8 +72,17 @@ class ConfigLoader:
     def validate(self) -> None:
         """Checks ALL required keys exist."""
         required_keys = [
-            "version", "grid_size", "max_moves", "num_games", "max_barriers",
-            "scoring", "agents", "llm", "mcp", "rl", "report",
+            "version",
+            "grid_size",
+            "max_moves",
+            "num_games",
+            "max_barriers",
+            "scoring",
+            "agents",
+            "llm",
+            "mcp",
+            "rl",
+            "report",
         ]
         for key in required_keys:
             if key not in self._config:

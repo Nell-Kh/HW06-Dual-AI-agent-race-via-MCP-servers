@@ -14,7 +14,7 @@ class ApiGatekeeper:
         self.logger.propagate = False
         if not self.logger.handlers:
             fh = logging.FileHandler("results/api_calls.log")
-            formatter = logging.Formatter('%(asctime)s - %(message)s')
+            formatter = logging.Formatter("%(asctime)s - %(message)s")
             fh.setFormatter(formatter)
             self.logger.addHandler(fh)
             self.logger.setLevel(logging.INFO)

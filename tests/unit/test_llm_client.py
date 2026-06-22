@@ -20,11 +20,14 @@ def mock_config(tmp_path):
         "scoring": {"cop_win": 20, "thief_win": 10, "cop_loss": 5, "thief_loss": 5},
         "agents": {"cop_start": "random", "thief_start": "random"},
         "llm": {
-            "provider": "openai", "model": "gpt-4o-mini", "max_tokens": 1000, "temperature": 0.7
+            "provider": "openai",
+            "model": "gpt-4o-mini",
+            "max_tokens": 1000,
+            "temperature": 0.7,
         },
         "mcp": {"cop_server_port": 8001, "thief_server_port": 8002, "host": "127.0.0.1"},
         "rl": {"learning_rate": 0.1, "discount_factor": 0.9, "epsilon": 0.2},
-        "report": {"recipient": "x", "timezone": "y", "group_name": "z", "github_repo": "w"}
+        "report": {"recipient": "x", "timezone": "y", "group_name": "z", "github_repo": "w"},
     }
     p = tmp_path / "config.json"
     with open(p, "w", encoding="utf-8") as f:
@@ -33,11 +36,13 @@ def mock_config(tmp_path):
     loader.load()
     return loader
 
+
 @pytest.fixture
 def mock_secrets():
     sm = MagicMock(spec=SecretsManager)
     sm.get_openai_key.return_value = "test-key"
     return sm
+
 
 def create_mock_response(content):
     mock_msg = MagicMock()
@@ -46,38 +51,44 @@ def create_mock_response(content):
     mock_resp.choices = [mock_msg]
     return mock_resp
 
+
 def test_generate_move_valid_direction(mock_config, mock_secrets):
     client = LLMClient(mock_config, mock_secrets)
-    with patch.object(client.client.chat.completions, 'create') as mock_create:
+    with patch.object(client.client.chat.completions, "create") as mock_create:
         mock_create.return_value = create_mock_response("up")
         result = client.generate_move("cop", "obs", ["up", "down"], [])
-        assert result == "up"
+        assert result["action"] == "up"
+
 
 def test_generate_move_invalid_response(mock_config, mock_secrets):
     client = LLMClient(mock_config, mock_secrets)
-    with patch.object(client.client.chat.completions, 'create') as mock_create:
+    with patch.object(client.client.chat.completions, "create") as mock_create:
         mock_create.return_value = create_mock_response("banana")
         result = client.generate_move("cop", "obs", ["left", "right"], [])
-        assert result == "left"
+        assert result["action"] == "left"
+
 
 def test_generate_move_case_insensitive(mock_config, mock_secrets):
     client = LLMClient(mock_config, mock_secrets)
-    with patch.object(client.client.chat.completions, 'create') as mock_create:
+    with patch.object(client.client.chat.completions, "create") as mock_create:
         mock_create.return_value = create_mock_response("UP")
         result = client.generate_move("cop", "obs", ["up", "down"], [])
-        assert result == "up"
+        assert result["action"] == "up"
+
 
 def test_parse_direction_finds_direction_in_sentence(mock_config, mock_secrets):
     client = LLMClient(mock_config, mock_secrets)
     result = client._parse_direction("I should go up now", ["up", "down"])
     assert result == "up"
 
+
 def test_barrier_decision_returns_valid_action(mock_config, mock_secrets):
     client = LLMClient(mock_config, mock_secrets)
-    with patch.object(client.client.chat.completions, 'create') as mock_create:
+    with patch.object(client.client.chat.completions, "create") as mock_create:
         mock_create.return_value = create_mock_response("place_barrier")
         result = client.generate_barrier_decision("obs", ["up", "down"], 5)
-        assert result == "place_barrier"
+        assert result["action"] == "place_barrier"
+
 
 def test_gatekeeper_retries_on_failure(mock_config):
     gatekeeper = ApiGatekeeper(mock_config)
@@ -87,10 +98,12 @@ def test_gatekeeper_retries_on_failure(mock_config):
             gatekeeper.execute(mock_api)
         assert mock_api.call_count == 4
 
+
 def test_gatekeeper_logs_calls(mock_config, tmp_path):
     gatekeeper = ApiGatekeeper(mock_config)
     log_file = tmp_path / "api_calls.log"
     import logging
+
     gatekeeper.logger.handlers.clear()
     fh = logging.FileHandler(str(log_file))
     gatekeeper.logger.addHandler(fh)

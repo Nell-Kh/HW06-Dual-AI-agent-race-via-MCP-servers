@@ -26,12 +26,7 @@ class MoveValidator:
         entity.set_position(entity.row + dr, entity.col + dc)
 
     def _get_delta(self, direction: str) -> tuple[int, int]:
-        deltas = {
-            "up": (-1, 0),
-            "down": (1, 0),
-            "left": (0, -1),
-            "right": (0, 1)
-        }
+        deltas = {"up": (-1, 0), "down": (1, 0), "left": (0, -1), "right": (0, 1)}
         if direction not in deltas:
             raise ValueError("Invalid direction")
         return deltas[direction]

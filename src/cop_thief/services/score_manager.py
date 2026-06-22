@@ -1,4 +1,3 @@
-
 from cop_thief.shared.config_loader import ConfigLoader
 
 

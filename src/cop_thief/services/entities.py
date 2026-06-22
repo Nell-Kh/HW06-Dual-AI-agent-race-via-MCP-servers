@@ -15,6 +15,7 @@ class Entity:
         self.row = row
         self.col = col
 
+
 class Cop(Entity):
     def __init__(self, name: str, row: int, col: int, config: ConfigLoader):
         super().__init__(name, row, col)
@@ -33,6 +34,7 @@ class Cop(Entity):
             raise ValueError("No barriers remaining")
         grid.place_barrier(self.row, self.col)
         self._barriers_used += 1
+
 
 class Thief(Entity):
     def __init__(self, name: str, row: int, col: int):
