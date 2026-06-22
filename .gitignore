@@ -12,3 +12,7 @@ __pycache__/
 .vscode/
 
 # Packages
+
+# Caches
+.pytest_cache/
+.ruff_cache/
