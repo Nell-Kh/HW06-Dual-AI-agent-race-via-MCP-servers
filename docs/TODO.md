@@ -1,0 +1,479 @@
+# Master TODO List
+
+## Phase 0: Repo & tooling
+- [x] [P1] [Done] [Owner: AI Agent] Initialize repo with uv init — pyproject.toml created
+- [x] [P1] [Done] [Owner: AI Agent] Create .gitignore — ignores .env, .venv, __pycache__, *.key, .idea/
+- [x] [P1] [Done] [Owner: AI Agent] Create .env-example — includes ANTHROPIC_API_KEY, GMAIL_SENDER, GMAIL_APP_PASSWORD
+- [x] [P1] [Done] [Owner: AI Agent] Create directory skeleton — src/cop_thief, tests, docs, config, data, results, assets, notebooks exist
+- [x] [P1] [Done] [Owner: AI Agent] Create README.md placeholder — minimal file written
+- [x] [P1] [Done] [Owner: AI Agent] Configure ruff — pyproject.toml has rules E,F,W,I,N,UP,B,C4,SIM and line-length=100
+- [x] [P1] [Done] [Owner: AI Agent] Run ruff check — 0 errors returned on initial setup
+- [x] [P1] [Done] [Owner: AI Agent] Commit project setup — pushed to main
+- [x] [P1] [Done] [Owner: AI Agent] Track uv.lock — removed from gitignore and committed
+- [x] [P1] [Done] [Owner: AI Agent] Verify github remote — remote origin is successfully set
+
+## Phase 1: Documentation & config
+- [x] [P1] [Done] [Owner: AI Agent] Write config.json — exact JSON structure implemented
+- [x] [P1] [Done] [Owner: AI Agent] Write PRD.md — includes project overview and pursuit problem
+- [x] [P1] [Done] [Owner: AI Agent] Write PRD.md Dec-POMDP tuple — tuple definitions complete (n, S, A, P, R, Omega, O, gamma)
+- [x] [P1] [Done] [Owner: AI Agent] Write PRD.md functional reqs — engine, servers, llm, strategy, reporter listed
+- [x] [P1] [Done] [Owner: AI Agent] Write PRD.md non-functional reqs — uv, ruff, 85% coverage, 150 lines limits listed
+- [x] [P1] [Done] [Owner: AI Agent] Write PRD.md scoring rules — exact points for cop/thief win/loss match config.json
+- [x] [P1] [Done] [Owner: AI Agent] Write PRD.md out of scope — no cloud, no inter-group, no role-swap noted
+- [x] [P1] [Done] [Owner: AI Agent] Write PLAN.md — includes mermaid diagram of Orchestrator and MCP servers
+- [x] [P1] [Done] [Owner: AI Agent] Write PLAN.md SDK design — facade pattern described for src/cop_thief/sdk/sdk.py
+- [x] [P1] [Done] [Owner: AI Agent] Write TODO.md — strict list of 500+ granular, real verification tasks
+
+## Phase 2: Config loader + security
+- [ ] [P1] [To Do] [Owner: AI Agent] Create ConfigLoader class — class skeleton exists
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement ConfigLoader.load() — parses config/config.json
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test ConfigLoader.load() missing file — raises FileNotFoundError when config.json is absent
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test ConfigLoader.load() invalid JSON — raises ValueError when config.json is corrupted
+- [ ] [P1] [To Do] [Owner: AI Agent] Create SecretsManager class — class skeleton exists
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement SecretsManager.load_env() — loads .env variables into os.environ
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test SecretsManager.get_anthropic_key() missing — raises KeyError when ANTHROPIC_API_KEY is not set
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test SecretsManager.get_gmail_credentials() missing — raises KeyError when GMAIL_SENDER is not set
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates existence of key 'version' — raises KeyError if missing
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates type/bounds for key 'version' — raises ValueError if invalid
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates existence of key 'grid_size' — raises KeyError if missing
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates type/bounds for key 'grid_size' — raises ValueError if invalid
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates existence of key 'max_moves' — raises KeyError if missing
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates type/bounds for key 'max_moves' — raises ValueError if invalid
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates existence of key 'num_games' — raises KeyError if missing
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates type/bounds for key 'num_games' — raises ValueError if invalid
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates existence of key 'max_barriers' — raises KeyError if missing
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates type/bounds for key 'max_barriers' — raises ValueError if invalid
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates existence of key 'scoring.cop_win' — raises KeyError if missing
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates type/bounds for key 'scoring.cop_win' — raises ValueError if invalid
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates existence of key 'scoring.thief_win' — raises KeyError if missing
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates type/bounds for key 'scoring.thief_win' — raises ValueError if invalid
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates existence of key 'scoring.cop_loss' — raises KeyError if missing
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates type/bounds for key 'scoring.cop_loss' — raises ValueError if invalid
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates existence of key 'scoring.thief_loss' — raises KeyError if missing
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates type/bounds for key 'scoring.thief_loss' — raises ValueError if invalid
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates existence of key 'agents.cop_start' — raises KeyError if missing
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates type/bounds for key 'agents.cop_start' — raises ValueError if invalid
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates existence of key 'agents.thief_start' — raises KeyError if missing
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates type/bounds for key 'agents.thief_start' — raises ValueError if invalid
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates existence of key 'llm.provider' — raises KeyError if missing
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates type/bounds for key 'llm.provider' — raises ValueError if invalid
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates existence of key 'llm.model' — raises KeyError if missing
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates type/bounds for key 'llm.model' — raises ValueError if invalid
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates existence of key 'llm.max_tokens' — raises KeyError if missing
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates type/bounds for key 'llm.max_tokens' — raises ValueError if invalid
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates existence of key 'llm.temperature' — raises KeyError if missing
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates type/bounds for key 'llm.temperature' — raises ValueError if invalid
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates existence of key 'mcp.cop_server_port' — raises KeyError if missing
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates type/bounds for key 'mcp.cop_server_port' — raises ValueError if invalid
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates existence of key 'mcp.thief_server_port' — raises KeyError if missing
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates type/bounds for key 'mcp.thief_server_port' — raises ValueError if invalid
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates existence of key 'mcp.host' — raises KeyError if missing
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates type/bounds for key 'mcp.host' — raises ValueError if invalid
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates existence of key 'rl.learning_rate' — raises KeyError if missing
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates type/bounds for key 'rl.learning_rate' — raises ValueError if invalid
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates existence of key 'rl.discount_factor' — raises KeyError if missing
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates type/bounds for key 'rl.discount_factor' — raises ValueError if invalid
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates existence of key 'rl.epsilon' — raises KeyError if missing
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates type/bounds for key 'rl.epsilon' — raises ValueError if invalid
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates existence of key 'report.recipient' — raises KeyError if missing
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates type/bounds for key 'report.recipient' — raises ValueError if invalid
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates existence of key 'report.timezone' — raises KeyError if missing
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates type/bounds for key 'report.timezone' — raises ValueError if invalid
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates existence of key 'report.group_name' — raises KeyError if missing
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates type/bounds for key 'report.group_name' — raises ValueError if invalid
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates existence of key 'report.github_repo' — raises KeyError if missing
+- [ ] [P1] [To Do] [Owner: AI Agent] ConfigLoader validates type/bounds for key 'report.github_repo' — raises ValueError if invalid
+
+## Phase 3: Core game engine
+- [ ] [P1] [To Do] [Owner: AI Agent] Create Grid class — class skeleton exists
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement Grid.__init__() — initializes 2D array based on config grid_size
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test Grid.__init__() invalid dimensions — raises ValueError for non-positive grid_size
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement Grid.is_within_bounds() — logic implemented
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test Grid.is_within_bounds() for coordinate (0,0) — returns correct boolean
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test Grid.is_within_bounds() for coordinate (4,4) — returns correct boolean
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test Grid.is_within_bounds() for coordinate (-1,0) — returns correct boolean
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test Grid.is_within_bounds() for coordinate (0,-1) — returns correct boolean
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test Grid.is_within_bounds() for coordinate (5,5) — returns correct boolean
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test Grid.is_within_bounds() for coordinate (2,2) — returns correct boolean
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test Grid.is_within_bounds() for coordinate (0,4) — returns correct boolean
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test Grid.is_within_bounds() for coordinate (4,0) — returns correct boolean
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement Grid.place_entity() — logic implemented
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test Grid.place_entity() Cop on empty cell — grid state updates correctly
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test Grid.place_entity() Thief on empty cell — grid state updates correctly
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test Grid.place_entity() out of bounds — raises ValueError
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test Grid.place_entity() on cell with barrier — raises ValueError
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement Grid.place_barrier() — logic implemented
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test Grid.place_barrier() on empty cell — grid state updates correctly
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test Grid.place_barrier() out of bounds — raises ValueError
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test Grid.place_barrier() on cell with Cop — raises ValueError
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test Grid.place_barrier() on cell with Thief — raises ValueError
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test Grid.place_barrier() on cell with existing barrier — raises ValueError
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement Grid.remove_entity() — logic implemented
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test Grid.remove_entity() valid entity — grid cell becomes empty
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test Grid.remove_entity() empty cell — raises ValueError or handles safely
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement Grid.get_state() — logic implemented
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test Grid.get_state() — returns correct dict with entities and barriers
+- [ ] [P1] [To Do] [Owner: AI Agent] Create Cop class — class skeleton exists
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement Cop.__init__() — initializes coordinates and barrier_count to config max_barriers
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement Cop.move() — updates internal coordinates
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test Cop.move() orthogonal steps — coordinates update correctly
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test Cop.move() diagonal steps — raises ValueError (assuming orthogonal only)
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement Cop.place_barrier() — decrements barrier_count
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test Cop.place_barrier() success — barrier_count drops by 1
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test Cop.place_barrier() failure (0 remaining) — raises ValueError
+- [ ] [P1] [To Do] [Owner: AI Agent] Create Thief class — class skeleton exists
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement Thief.__init__() — initializes coordinates
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement Thief.move() — updates internal coordinates
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test Thief.move() orthogonal steps — coordinates update correctly
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test Thief.move() diagonal steps — raises ValueError
+- [ ] [P1] [To Do] [Owner: AI Agent] Create MoveValidator class — class skeleton exists
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement MoveValidator.is_valid() — checks bounds and barriers
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test MoveValidator.is_valid() Cop to empty cell — returns True
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test MoveValidator.is_valid() Cop to barrier — returns False
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test MoveValidator.is_valid() Cop to out of bounds — returns False
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test MoveValidator.is_valid() Thief to empty cell — returns True
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test MoveValidator.is_valid() Thief to barrier — returns False
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test MoveValidator.is_valid() Thief to out of bounds — returns False
+- [ ] [P1] [To Do] [Owner: AI Agent] Create ScoreManager class — class skeleton exists
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement ScoreManager.__init__() — initializes scores to 0
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement ScoreManager.record_cop_win() — adds config.scoring.cop_win to Cop and thief_loss to Thief
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test ScoreManager.record_cop_win() — asserts correct integer sums
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement ScoreManager.record_thief_win() — adds config.scoring.thief_win to Thief and cop_loss to Cop
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test ScoreManager.record_thief_win() — asserts correct integer sums
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement ScoreManager.get_scores() — returns dictionary of current scores
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement ScoreManager.reset_scores() — sets cop and thief scores back to 0
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test ScoreManager — 3 cop wins, 3 thief wins yields exact mathematical total from config
+
+## Phase 4: Strategy module
+- [ ] [P1] [To Do] [Owner: AI Agent] Create ManhattanHeuristic class — class skeleton exists
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement ManhattanHeuristic.calculate_distance() — math logic (abs(x1-x2) + abs(y1-y2))
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test ManhattanHeuristic.calculate_distance() (0,0) to (4,4) — returns 8
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test ManhattanHeuristic.calculate_distance() (2,2) to (2,2) — returns 0
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test ManhattanHeuristic.calculate_distance() (0,4) to (4,0) — returns 8
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test ManhattanHeuristic.calculate_distance() (1,1) to (3,2) — returns 3
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement ManhattanHeuristic.get_best_cop_move() — evaluates adjacent cells to minimize distance
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test ManhattanHeuristic.get_best_cop_move() — avoids barrier cells correctly
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test ManhattanHeuristic.get_best_cop_move() — chooses step closest to Thief
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement ManhattanHeuristic.get_best_thief_move() — evaluates adjacent cells to maximize distance
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test ManhattanHeuristic.get_best_thief_move() — avoids barrier cells correctly
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test ManhattanHeuristic.get_best_thief_move() — chooses step furthest from Cop
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test ManhattanHeuristic.get_best_thief_move() cornered thief — returns safest available move or stay
+- [ ] [P1] [To Do] [Owner: AI Agent] Create QTable class — class skeleton exists
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement QTable.__init__() — loads config learning_rate, discount_factor, epsilon
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement QTable.get_state_index() — translates 5x5 grid entities to unique integer/string
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test QTable.get_state_index() — identical grids return identical indexes
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement QTable.get_q_value() — returns 0.0 for unseen state/action
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test QTable.get_q_value() — returns previously set float value
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement QTable.set_q_value() — writes float to dictionary/array
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement QTable.update_bellman() — strictly implements Q(s,a) = Q(s,a) + alpha*[r + gamma*maxQ(s') - Q(s,a)]
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test QTable.update_bellman() positive reward — Q-value increases correctly
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test QTable.update_bellman() zero reward — Q-value updates strictly via discount factor and next state
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement QTable.choose_action_epsilon_greedy() — uses random.random() < epsilon logic
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test QTable.choose_action_epsilon_greedy() epsilon=1.0 — 100% exploration (uses random choice)
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test QTable.choose_action_epsilon_greedy() epsilon=0.0 — 100% exploitation (uses argmax Q)
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement QTable.save_table() — writes dictionary/array to results/q_table.npy or .json
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test QTable.save_table() — asserts file is created on disk
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement QTable.load_table() — reads from results/q_table.npy or .json
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test QTable.load_table() — asserts dictionary/array is restored correctly
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test RL Q-Table convergence scenario 1 — Q-values trend towards expected rewards over iterations
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test RL Q-Table convergence scenario 2 — Q-values trend towards expected rewards over iterations
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test RL Q-Table convergence scenario 3 — Q-values trend towards expected rewards over iterations
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test RL Q-Table convergence scenario 4 — Q-values trend towards expected rewards over iterations
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test RL Q-Table convergence scenario 5 — Q-values trend towards expected rewards over iterations
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test RL Q-Table convergence scenario 6 — Q-values trend towards expected rewards over iterations
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test RL Q-Table convergence scenario 7 — Q-values trend towards expected rewards over iterations
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test RL Q-Table convergence scenario 8 — Q-values trend towards expected rewards over iterations
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test RL Q-Table convergence scenario 9 — Q-values trend towards expected rewards over iterations
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test RL Q-Table convergence scenario 10 — Q-values trend towards expected rewards over iterations
+
+## Phase 5: LLM client + MCP servers
+- [ ] [P1] [To Do] [Owner: AI Agent] Create LLMClient class — class skeleton exists
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement LLMClient.__init__() — loads anthropic API key and config limits
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement LLMClient.build_prompt() — injects JSON grid state into prompt template
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test LLMClient.build_prompt() — asserts output string contains Cop and Thief coords
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement LLMClient.parse_response() — extracts structured JSON from raw markdown block
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test LLMClient.parse_response() clean JSON — parses exactly to dict
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test LLMClient.parse_response() markdown wrapped JSON — strips ```json and parses
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test LLMClient.parse_response() malformed JSON — raises ValueError
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement LLMClient.generate_action() — calls anthropic.messages.create
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test LLMClient.generate_action() (mocked) — returns parsed dict
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test LLMClient.generate_action() AuthenticationError — catches and logs auth failure
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test LLMClient.generate_action() RateLimitError — catches and implements retry backoff
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test LLMClient.generate_action() Timeout — catches and aborts gracefully
+- [ ] [P1] [To Do] [Owner: AI Agent] Create ApiGatekeeper class — class skeleton exists
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement ApiGatekeeper.enforce_rate_limit() — tracks API calls per minute/hour
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test ApiGatekeeper.enforce_rate_limit() under limit — allows execution
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test ApiGatekeeper.enforce_rate_limit() over limit — raises RateLimitExceededException or sleeps
+- [ ] [P1] [To Do] [Owner: AI Agent] Create CopMCPServer class — class skeleton exists
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement CopMCPServer.start_server() — binds strictly to config.mcp.cop_server_port
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement CopMCPServer.stop_server() — releases port resource
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement CopMCPServer.handle_get_state() — exposes current grid observation tool
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement CopMCPServer.handle_move_action() — exposes move tool for orchestrator
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement CopMCPServer.handle_barrier_action() — exposes barrier placement tool
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement CopMCPServer.handle_message_action() — exposes natural language messaging tool
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test CopMCPServer tools (mocked requests) — asserts correct tool JSON schemas returned
+- [ ] [P1] [To Do] [Owner: AI Agent] Create ThiefMCPServer class — class skeleton exists
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement ThiefMCPServer.start_server() — binds strictly to config.mcp.thief_server_port
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement ThiefMCPServer.stop_server() — releases port resource
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement ThiefMCPServer.handle_get_state() — exposes current grid observation tool
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement ThiefMCPServer.handle_move_action() — exposes move tool for orchestrator
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement ThiefMCPServer.handle_message_action() — exposes natural language messaging tool
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test ThiefMCPServer tools (mocked requests) — asserts correct tool JSON schemas returned
+- [ ] [P1] [To Do] [Owner: AI Agent] Mock validation test case LLM formatting robustness 1 — handles specific extraneous LLM text generation correctly
+- [ ] [P1] [To Do] [Owner: AI Agent] Mock validation test case LLM formatting robustness 2 — handles specific extraneous LLM text generation correctly
+- [ ] [P1] [To Do] [Owner: AI Agent] Mock validation test case LLM formatting robustness 3 — handles specific extraneous LLM text generation correctly
+- [ ] [P1] [To Do] [Owner: AI Agent] Mock validation test case LLM formatting robustness 4 — handles specific extraneous LLM text generation correctly
+- [ ] [P1] [To Do] [Owner: AI Agent] Mock validation test case LLM formatting robustness 5 — handles specific extraneous LLM text generation correctly
+- [ ] [P1] [To Do] [Owner: AI Agent] Mock validation test case LLM formatting robustness 6 — handles specific extraneous LLM text generation correctly
+- [ ] [P1] [To Do] [Owner: AI Agent] Mock validation test case LLM formatting robustness 7 — handles specific extraneous LLM text generation correctly
+- [ ] [P1] [To Do] [Owner: AI Agent] Mock validation test case LLM formatting robustness 8 — handles specific extraneous LLM text generation correctly
+- [ ] [P1] [To Do] [Owner: AI Agent] Mock validation test case LLM formatting robustness 9 — handles specific extraneous LLM text generation correctly
+- [ ] [P1] [To Do] [Owner: AI Agent] Mock validation test case LLM formatting robustness 10 — handles specific extraneous LLM text generation correctly
+- [ ] [P1] [To Do] [Owner: AI Agent] Mock validation test case LLM formatting robustness 11 — handles specific extraneous LLM text generation correctly
+- [ ] [P1] [To Do] [Owner: AI Agent] Mock validation test case LLM formatting robustness 12 — handles specific extraneous LLM text generation correctly
+- [ ] [P1] [To Do] [Owner: AI Agent] Mock validation test case LLM formatting robustness 13 — handles specific extraneous LLM text generation correctly
+- [ ] [P1] [To Do] [Owner: AI Agent] Mock validation test case LLM formatting robustness 14 — handles specific extraneous LLM text generation correctly
+- [ ] [P1] [To Do] [Owner: AI Agent] Mock validation test case LLM formatting robustness 15 — handles specific extraneous LLM text generation correctly
+
+## Phase 6: Orchestrator + game runner
+- [ ] [P1] [To Do] [Owner: AI Agent] Create Orchestrator class — class skeleton exists
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement Orchestrator.__init__() — initializes game engine, MCP servers, and LLM clients
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement Orchestrator.setup_game() — clears grid, resets moves to 0, randomizes agent starts
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test Orchestrator.setup_game() — asserts grid is fresh and moves == 0
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement Orchestrator.check_cop_caught_thief() — returns True if Cop coord == Thief coord
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test Orchestrator.check_cop_caught_thief() collision — returns True
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test Orchestrator.check_cop_caught_thief() separate cells — returns False
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement Orchestrator.check_thief_survived() — returns True if moves == 25 and no collision
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test Orchestrator.check_thief_survived() move 24 — returns False
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test Orchestrator.check_thief_survived() move 25 — returns True
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement Orchestrator.orchestrate_turn() — queries Cop LLM, sends via MCP, queries Thief LLM, sends via MCP
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test Orchestrator.orchestrate_turn() (mocked) — verifies move counter increments by 1
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement Orchestrator.run_sub_game() — loops orchestrate_turn until win condition met
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test Orchestrator.run_sub_game() (mocked) — breaks loop on cop win
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test Orchestrator.run_sub_game() (mocked) — breaks loop on thief win (move 25)
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement Orchestrator.end_game_sequence() — tallies scores into ScoreManager and cleans up
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement MessageRouter class — class skeleton exists
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement MessageRouter.route_cop_message() — forwards Cop string to Thief MCP
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement MessageRouter.route_thief_message() — forwards Thief string to Cop MCP
+- [ ] [P1] [To Do] [Owner: AI Agent] Create CopThiefSDK class — SDK facade skeleton exists
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement CopThiefSDK.initialize() — bootstraps configs and servers
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement CopThiefSDK.run_all_games() — loops run_sub_game exactly 6 times
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test CopThiefSDK.run_all_games() (mocked) — asserts 6 executions occurred
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement CopThiefSDK.get_final_scores() — returns dictionary of final totals
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement CopThiefSDK.teardown() — cleanly stops MCP servers
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test full turn cycle execution for move 1 — loop state consistency verified
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test full turn cycle execution for move 2 — loop state consistency verified
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test full turn cycle execution for move 3 — loop state consistency verified
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test full turn cycle execution for move 4 — loop state consistency verified
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test full turn cycle execution for move 5 — loop state consistency verified
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test full turn cycle execution for move 6 — loop state consistency verified
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test full turn cycle execution for move 7 — loop state consistency verified
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test full turn cycle execution for move 8 — loop state consistency verified
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test full turn cycle execution for move 9 — loop state consistency verified
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test full turn cycle execution for move 10 — loop state consistency verified
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test full turn cycle execution for move 11 — loop state consistency verified
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test full turn cycle execution for move 12 — loop state consistency verified
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test full turn cycle execution for move 13 — loop state consistency verified
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test full turn cycle execution for move 14 — loop state consistency verified
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test full turn cycle execution for move 15 — loop state consistency verified
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test full turn cycle execution for move 16 — loop state consistency verified
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test full turn cycle execution for move 17 — loop state consistency verified
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test full turn cycle execution for move 18 — loop state consistency verified
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test full turn cycle execution for move 19 — loop state consistency verified
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test full turn cycle execution for move 20 — loop state consistency verified
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test full turn cycle execution for move 21 — loop state consistency verified
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test full turn cycle execution for move 22 — loop state consistency verified
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test full turn cycle execution for move 23 — loop state consistency verified
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test full turn cycle execution for move 24 — loop state consistency verified
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test full turn cycle execution for move 25 — loop state consistency verified
+
+## Phase 7: Gmail reporter + JSON output
+- [ ] [P1] [To Do] [Owner: AI Agent] Create ReportGenerator class — class skeleton exists
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement ReportGenerator.build_report_dict() — assembles runtime data into python dictionary
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test ReportGenerator.build_report_dict() — asserts group_name and github_repo match config
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test ReportGenerator.build_report_dict() — asserts sub_games list length is exactly 6
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test ReportGenerator.build_report_dict() — asserts totals.cop and totals.thief sum correctly
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement ReportGenerator.validate_schema() — validates dictionary against assignment JSON requirements
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test ReportGenerator.validate_schema() valid dict — passes
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test ReportGenerator.validate_schema() missing keys — raises ValueError
+- [ ] [P1] [To Do] [Owner: AI Agent] Create GmailReporter class — class skeleton exists
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement GmailReporter.__init__() — loads SMTP credentials from SecretsManager
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement GmailReporter.authenticate_smtp() — connects to smtp.gmail.com:587
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test GmailReporter.authenticate_smtp() (mocked) — handles SMTPAuthenticationError gracefully
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test GmailReporter.authenticate_smtp() (mocked) — handles SMTPConnectError gracefully
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement GmailReporter.construct_email() — builds MIMEText object with JSON body
+- [ ] [P1] [To Do] [Owner: AI Agent] Unit test GmailReporter.construct_email() — asserts recipient matches config.report.recipient
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement GmailReporter.send_email() — executes server.sendmail()
+- [ ] [P1] [To Do] [Owner: AI Agent] Integration test GmailReporter.send_email() (mocked) — verifies email dispatch function called once at end of 6 games
+- [ ] [P1] [To Do] [Owner: AI Agent] Report JSON data aggregation edge case check 1 — math totals correctly in anomalous game flow
+- [ ] [P1] [To Do] [Owner: AI Agent] Report JSON data aggregation edge case check 2 — math totals correctly in anomalous game flow
+- [ ] [P1] [To Do] [Owner: AI Agent] Report JSON data aggregation edge case check 3 — math totals correctly in anomalous game flow
+- [ ] [P1] [To Do] [Owner: AI Agent] Report JSON data aggregation edge case check 4 — math totals correctly in anomalous game flow
+- [ ] [P1] [To Do] [Owner: AI Agent] Report JSON data aggregation edge case check 5 — math totals correctly in anomalous game flow
+- [ ] [P1] [To Do] [Owner: AI Agent] Report JSON data aggregation edge case check 6 — math totals correctly in anomalous game flow
+- [ ] [P1] [To Do] [Owner: AI Agent] Report JSON data aggregation edge case check 7 — math totals correctly in anomalous game flow
+- [ ] [P1] [To Do] [Owner: AI Agent] Report JSON data aggregation edge case check 8 — math totals correctly in anomalous game flow
+- [ ] [P1] [To Do] [Owner: AI Agent] Report JSON data aggregation edge case check 9 — math totals correctly in anomalous game flow
+- [ ] [P1] [To Do] [Owner: AI Agent] Report JSON data aggregation edge case check 10 — math totals correctly in anomalous game flow
+
+## Phase 8: Research, analysis, final polish
+- [ ] [P1] [To Do] [Owner: AI Agent] Create Jupyter Notebook analysis.ipynb — notebook file created
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement Q-Table learning curve graph in Notebook — plot generated displaying reward over time
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement Agent win-rate bar chart in Notebook — plot generated showing Cop vs Thief ratio
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement Heatmap of Cop locations in Notebook — spatial heatmap visualizes board coverage
+- [ ] [P1] [To Do] [Owner: AI Agent] Implement Heatmap of Thief locations in Notebook — spatial heatmap visualizes evasion spots
+- [ ] [P1] [To Do] [Owner: AI Agent] Run full pytest suite globally — 100% of written tests pass successfully
+- [ ] [P1] [To Do] [Owner: AI Agent] Run pytest --cov globally — verified > 85% total line coverage
+- [ ] [P1] [To Do] [Owner: AI Agent] Finalize README.md execution instructions — end-to-end command provided
+- [ ] [P1] [To Do] [Owner: AI Agent] Finalize README.md architecture review — Dec-POMDP mapping and text complete
+- [ ] [P1] [To Do] [Owner: AI Agent] Verify file size of src/cop_thief/sdk/sdk.py — confirm line count <= 150 (excluding blanks/comments)
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/sdk/sdk.py for rule E — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/sdk/sdk.py for rule F — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/sdk/sdk.py for rule W — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/sdk/sdk.py for rule I — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/sdk/sdk.py for rule N — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/sdk/sdk.py for rule UP — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/sdk/sdk.py for rule B — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/sdk/sdk.py for rule C4 — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/sdk/sdk.py for rule SIM — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Verify file size of src/cop_thief/services/orchestrator.py — confirm line count <= 150 (excluding blanks/comments)
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/orchestrator.py for rule E — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/orchestrator.py for rule F — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/orchestrator.py for rule W — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/orchestrator.py for rule I — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/orchestrator.py for rule N — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/orchestrator.py for rule UP — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/orchestrator.py for rule B — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/orchestrator.py for rule C4 — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/orchestrator.py for rule SIM — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Verify file size of src/cop_thief/services/game_loop.py — confirm line count <= 150 (excluding blanks/comments)
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/game_loop.py for rule E — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/game_loop.py for rule F — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/game_loop.py for rule W — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/game_loop.py for rule I — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/game_loop.py for rule N — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/game_loop.py for rule UP — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/game_loop.py for rule B — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/game_loop.py for rule C4 — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/game_loop.py for rule SIM — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Verify file size of src/cop_thief/services/llm_client.py — confirm line count <= 150 (excluding blanks/comments)
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/llm_client.py for rule E — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/llm_client.py for rule F — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/llm_client.py for rule W — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/llm_client.py for rule I — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/llm_client.py for rule N — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/llm_client.py for rule UP — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/llm_client.py for rule B — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/llm_client.py for rule C4 — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/llm_client.py for rule SIM — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Verify file size of src/cop_thief/services/mcp_server.py — confirm line count <= 150 (excluding blanks/comments)
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/mcp_server.py for rule E — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/mcp_server.py for rule F — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/mcp_server.py for rule W — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/mcp_server.py for rule I — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/mcp_server.py for rule N — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/mcp_server.py for rule UP — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/mcp_server.py for rule B — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/mcp_server.py for rule C4 — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/mcp_server.py for rule SIM — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Verify file size of src/cop_thief/services/gmail_reporter.py — confirm line count <= 150 (excluding blanks/comments)
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/gmail_reporter.py for rule E — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/gmail_reporter.py for rule F — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/gmail_reporter.py for rule W — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/gmail_reporter.py for rule I — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/gmail_reporter.py for rule N — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/gmail_reporter.py for rule UP — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/gmail_reporter.py for rule B — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/gmail_reporter.py for rule C4 — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/gmail_reporter.py for rule SIM — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Verify file size of src/cop_thief/services/report_generator.py — confirm line count <= 150 (excluding blanks/comments)
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/report_generator.py for rule E — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/report_generator.py for rule F — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/report_generator.py for rule W — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/report_generator.py for rule I — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/report_generator.py for rule N — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/report_generator.py for rule UP — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/report_generator.py for rule B — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/report_generator.py for rule C4 — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/services/report_generator.py for rule SIM — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Verify file size of src/cop_thief/shared/config_loader.py — confirm line count <= 150 (excluding blanks/comments)
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/config_loader.py for rule E — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/config_loader.py for rule F — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/config_loader.py for rule W — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/config_loader.py for rule I — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/config_loader.py for rule N — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/config_loader.py for rule UP — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/config_loader.py for rule B — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/config_loader.py for rule C4 — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/config_loader.py for rule SIM — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Verify file size of src/cop_thief/shared/secrets_manager.py — confirm line count <= 150 (excluding blanks/comments)
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/secrets_manager.py for rule E — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/secrets_manager.py for rule F — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/secrets_manager.py for rule W — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/secrets_manager.py for rule I — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/secrets_manager.py for rule N — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/secrets_manager.py for rule UP — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/secrets_manager.py for rule B — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/secrets_manager.py for rule C4 — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/secrets_manager.py for rule SIM — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Verify file size of src/cop_thief/shared/grid.py — confirm line count <= 150 (excluding blanks/comments)
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/grid.py for rule E — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/grid.py for rule F — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/grid.py for rule W — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/grid.py for rule I — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/grid.py for rule N — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/grid.py for rule UP — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/grid.py for rule B — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/grid.py for rule C4 — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/grid.py for rule SIM — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Verify file size of src/cop_thief/shared/entities.py — confirm line count <= 150 (excluding blanks/comments)
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/entities.py for rule E — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/entities.py for rule F — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/entities.py for rule W — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/entities.py for rule I — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/entities.py for rule N — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/entities.py for rule UP — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/entities.py for rule B — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/entities.py for rule C4 — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/entities.py for rule SIM — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Verify file size of src/cop_thief/shared/validator.py — confirm line count <= 150 (excluding blanks/comments)
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/validator.py for rule E — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/validator.py for rule F — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/validator.py for rule W — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/validator.py for rule I — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/validator.py for rule N — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/validator.py for rule UP — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/validator.py for rule B — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/validator.py for rule C4 — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/validator.py for rule SIM — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Verify file size of src/cop_thief/shared/score_manager.py — confirm line count <= 150 (excluding blanks/comments)
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/score_manager.py for rule E — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/score_manager.py for rule F — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/score_manager.py for rule W — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/score_manager.py for rule I — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/score_manager.py for rule N — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/score_manager.py for rule UP — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/score_manager.py for rule B — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/score_manager.py for rule C4 — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/score_manager.py for rule SIM — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Verify file size of src/cop_thief/shared/qtable.py — confirm line count <= 150 (excluding blanks/comments)
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/qtable.py for rule E — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/qtable.py for rule F — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/qtable.py for rule W — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/qtable.py for rule I — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/qtable.py for rule N — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/qtable.py for rule UP — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/qtable.py for rule B — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/qtable.py for rule C4 — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/qtable.py for rule SIM — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Verify file size of src/cop_thief/shared/manhattan.py — confirm line count <= 150 (excluding blanks/comments)
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/manhattan.py for rule E — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/manhattan.py for rule F — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/manhattan.py for rule W — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/manhattan.py for rule I — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/manhattan.py for rule N — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/manhattan.py for rule UP — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/manhattan.py for rule B — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/manhattan.py for rule C4 — 0 violations found
+- [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/manhattan.py for rule SIM — 0 violations found
+
