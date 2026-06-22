@@ -477,3 +477,11 @@
 - [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/manhattan.py for rule C4 — 0 violations found
 - [ ] [P1] [To Do] [Owner: AI Agent] Run ruff check on src/cop_thief/shared/manhattan.py for rule SIM — 0 violations found
 
+
+
+## Chore: Switch LLM Provider to OpenAI
+- [x] Update config.json to openai/gpt-4o-mini
+- [x] Update .env-example to OPENAI_API_KEY
+- [x] Create local .env with actual key
+- [x] Update secrets_manager.py for OPENAI_API_KEY
+- [x] Update all tests for OpenAI configuration

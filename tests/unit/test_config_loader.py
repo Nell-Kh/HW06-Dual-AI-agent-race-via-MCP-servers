@@ -24,8 +24,8 @@ def valid_config_file(tmp_path):
             "thief_start": "random"
         },
         "llm": {
-            "provider": "anthropic",
-            "model": "claude-sonnet-4-6",
+            "provider": "openai",
+            "model": "gpt-4o-mini",
             "max_tokens": 1000,
             "temperature": 0.7
         },

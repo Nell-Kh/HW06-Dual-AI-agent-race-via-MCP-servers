@@ -12,11 +12,11 @@ class SecretsManager:
         load_dotenv()
 
     @staticmethod
-    def get_anthropic_key() -> str:
-        """Returns ANTHROPIC_API_KEY, raises KeyError if missing."""
-        key = os.environ.get("ANTHROPIC_API_KEY")
+    def get_openai_key() -> str:
+        """Returns OPENAI_API_KEY, raises KeyError if missing."""
+        key = os.environ.get("OPENAI_API_KEY")
         if not key:
-            raise KeyError("ANTHROPIC_API_KEY is missing from environment variables")
+            raise KeyError("OPENAI_API_KEY is missing from environment variables")
         return key
 
     @staticmethod
