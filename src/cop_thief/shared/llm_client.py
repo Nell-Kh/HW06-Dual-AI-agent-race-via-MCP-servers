@@ -65,7 +65,11 @@ class LLMClient:
         }
 
     def generate_barrier_decision(
-        self, cop_observation: str, valid_moves: list[str], barriers_remaining: int, history: list[str] = None
+        self,
+        cop_observation: str,
+        valid_moves: list[str],
+        barriers_remaining: int,
+        history: list[str] | None = None,
     ) -> dict:
         if history is None:
             history = []

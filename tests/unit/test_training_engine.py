@@ -30,6 +30,7 @@ def test_training_engine_init(mock_config):
 @patch("cop_thief.services.training_engine.GameState")
 def test_run_headless_games(mock_game_state_class, mock_config, tmp_path):
     q_table = MagicMock(spec=QTable)
+    q_table.epsilon = 1.0
     q_table.choose_action.return_value = "up"
     q_table.encode_state.return_value = 0
 
@@ -40,6 +41,7 @@ def test_run_headless_games(mock_game_state_class, mock_config, tmp_path):
     mock_game.thief.col = 0
     mock_game.grid.rows = 5
     mock_game.grid.cols = 5
+    mock_game.grid.is_barrier.return_value = False
     mock_game_state_class.return_value = mock_game
 
     mock_config._config["training"]["save_path"] = str(tmp_path / "test_q.npy")
