@@ -65,13 +65,15 @@ class LLMClient:
         }
 
     def generate_barrier_decision(
-        self, cop_observation: str, valid_moves: list[str], barriers_remaining: int
+        self, cop_observation: str, valid_moves: list[str], barriers_remaining: int, history: list[str] = None
     ) -> dict:
+        if history is None:
+            history = []
         if barriers_remaining <= 0:
-            return self.generate_move("cop", cop_observation, valid_moves, [])
+            return self.generate_move("cop", cop_observation, valid_moves, history)
 
         messages = self.prompt_builder.build_cop_prompt(
-            cop_observation, valid_moves, [], barriers_remaining
+            cop_observation, valid_moves, history, barriers_remaining
         )
         try:
             response = self.client.chat.completions.create(  # type: ignore

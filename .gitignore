@@ -16,3 +16,6 @@ __pycache__/
 # Caches
 .pytest_cache/
 .ruff_cache/
+
+# Generated run artifacts
+results/

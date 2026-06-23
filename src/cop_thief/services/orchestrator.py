@@ -36,6 +36,9 @@ class Orchestrator:
         self.transcript_writer = transcript_writer
         self.html_replay = html_replay
         self.barriers_remaining = config.get_max_barriers()
+        self.cop_history = []
+        self.thief_history = []
+        self.last_dialogue = {"cop": "", "thief": ""}
 
     def run_game(self) -> dict:
         trainer = TrainingEngine(self.config, self.q_table)
@@ -54,6 +57,9 @@ class Orchestrator:
         game.reset_for_sub_game()
         validator = MoveValidator(game.grid)
         self.barriers_remaining = self.config.get_max_barriers()
+        self.cop_history = []
+        self.thief_history = []
+        self.last_dialogue = {"cop": "", "thief": ""}
         moves, max_moves, winner = 0, self.config.get_max_moves(), "timeout"
 
         while moves < max_moves:
@@ -97,12 +103,14 @@ class Orchestrator:
         c_pos, t_pos = (game.cop.row, game.cop.col), (game.thief.row, game.thief.col)
         state_int_before = self.q_table.encode_state(c_pos, t_pos, g_sz)
 
+        history = self.cop_history if agent_name == "cop" else self.thief_history
+
         if agent_name == "cop":
             result = self.llm_client.generate_barrier_decision(
-                obs, valid_moves, self.barriers_remaining
+                obs, valid_moves, self.barriers_remaining, history
             )
         else:
-            result = self.llm_client.generate_move(agent_name, obs, valid_moves, [])
+            result = self.llm_client.generate_move(agent_name, obs, valid_moves, history)
 
         action = result["action"]
         self.cost_tracker.record_call(
@@ -147,6 +155,21 @@ class Orchestrator:
             self.q_table.update_bellman(
                 state_int_before, action, 10 if caught else -1, state_int_after, caught
             )
+
+        opponent_name = "thief" if agent_name == "cop" else "cop"
+        opp_msg = self.last_dialogue.get(opponent_name, "")
+        entry = f"T{turn}: I moved {action} | saw {obs} | opponent said: '{opp_msg}'"
+        
+        if agent_name == "cop":
+            self.cop_history.append(entry)
+            if len(self.cop_history) > 4:
+                self.cop_history.pop(0)
+            self.last_dialogue["cop"] = result["dialogue"]
+        else:
+            self.thief_history.append(entry)
+            if len(self.thief_history) > 4:
+                self.thief_history.pop(0)
+            self.last_dialogue["thief"] = result["dialogue"]
 
         return action
 
