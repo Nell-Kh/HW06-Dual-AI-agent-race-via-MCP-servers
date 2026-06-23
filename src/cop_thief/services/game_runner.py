@@ -1,5 +1,6 @@
 from cop_thief.services.cost_tracker import CostTracker
 from cop_thief.services.gmail_reporter import GmailReporter
+from cop_thief.services.html_replay import HTMLReplay
 from cop_thief.services.orchestrator import Orchestrator
 from cop_thief.services.partial_observer import PartialObserver
 from cop_thief.services.q_table import QTable
@@ -27,6 +28,7 @@ class GameRunner:
         self.transcript_writer = TranscriptWriter(self.config)
         self.report_generator = ReportGenerator(self.config)
         self.gmail_reporter = GmailReporter(self.config, self.secrets)
+        self.html_replay = HTMLReplay(self.config)
 
         # We don't actually launch the MCP servers here because fastmcp starts on run().
         # In a real setup, we'd spawn them as subprocesses. For now we pass Mocks or None.
@@ -43,6 +45,7 @@ class GameRunner:
             self.partial_observer,
             self.cost_tracker,
             self.transcript_writer,
+            self.html_replay,
         )
 
     def run(self) -> dict:
@@ -57,6 +60,7 @@ class GameRunner:
         )
         self.report_generator.save_report(report)
         self.gmail_reporter.send_report(report)
+        self.html_replay.generate_html()
 
         return results
 

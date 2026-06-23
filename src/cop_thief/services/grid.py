@@ -5,6 +5,7 @@ class Grid:
     def __init__(self, config: ConfigLoader):
         self.rows, self.cols = config.get_grid_size()
         self.state = [[0 for _ in range(self.cols)] for _ in range(self.rows)]
+        self._barriers = set()
 
     def is_within_bounds(self, row: int, col: int) -> bool:
         return 0 <= row < self.rows and 0 <= col < self.cols
@@ -15,6 +16,7 @@ class Grid:
         if self.state[row][col] == 1:
             raise ValueError("Already a barrier")
         self.state[row][col] = 1
+        self._barriers.add((row, col))
 
     def is_barrier(self, row: int, col: int) -> bool:
         if not self.is_within_bounds(row, col):
@@ -26,6 +28,7 @@ class Grid:
 
     def reset(self) -> None:
         self.state = [[0 for _ in range(self.cols)] for _ in range(self.rows)]
+        self._barriers = set()
 
     def to_display_string(self) -> str:
         lines = []
@@ -33,3 +36,6 @@ class Grid:
             row_str = " ".join(["X" if self.state[r][c] == 1 else "." for c in range(self.cols)])
             lines.append(row_str)
         return "\n".join(lines)
+
+    def get_barriers(self) -> list[tuple[int, int]]:
+        return list(self._barriers)

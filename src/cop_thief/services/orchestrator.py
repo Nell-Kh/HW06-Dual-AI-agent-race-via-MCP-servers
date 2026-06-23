@@ -1,5 +1,6 @@
 from cop_thief.services.cost_tracker import CostTracker
 from cop_thief.services.game_state import GameState
+from cop_thief.services.html_replay import HTMLReplay
 from cop_thief.services.move_validator import MoveValidator
 from cop_thief.services.partial_observer import PartialObserver
 from cop_thief.services.q_table import QTable
@@ -22,6 +23,7 @@ class Orchestrator:
         partial_observer: PartialObserver,
         cost_tracker: CostTracker,
         transcript_writer: TranscriptWriter,
+        html_replay: HTMLReplay,
     ):
         self.config = config
         self.llm_client = llm_client
@@ -32,6 +34,7 @@ class Orchestrator:
         self.partial_observer = partial_observer
         self.cost_tracker = cost_tracker
         self.transcript_writer = transcript_writer
+        self.html_replay = html_replay
         self.barriers_remaining = config.get_max_barriers()
 
     def run_game(self) -> dict:
@@ -107,6 +110,16 @@ class Orchestrator:
         )
         self.transcript_writer.record_move(
             sub_game, turn, agent_name, obs, action, result["dialogue"]
+        )
+        self.html_replay.add_frame(
+            sub_game,
+            turn,
+            agent_name,
+            (game.cop.row, game.cop.col),
+            (game.thief.row, game.thief.col),
+            game.grid.get_barriers(),
+            action,
+            result["dialogue"],
         )
 
         if action == "place_barrier" and agent_name == "cop" and self.barriers_remaining > 0:

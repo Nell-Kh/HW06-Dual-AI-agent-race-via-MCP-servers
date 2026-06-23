@@ -30,6 +30,7 @@ def mock_dependencies():
     partial_obs = MagicMock()
     cost_tracker = MagicMock()
     transcript_writer = MagicMock()
+    html_replay = MagicMock()
 
     return (
         config,
@@ -41,6 +42,7 @@ def mock_dependencies():
         partial_obs,
         cost_tracker,
         transcript_writer,
+        html_replay,
     )
 
 
