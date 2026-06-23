@@ -1,0 +1,56 @@
+{
+  "group_name": "yanel11",
+  "students": [],
+  "github_repo": "https://github.com/Nell-Kh/HW06-Dual-AI-agent-race-via-MCP-servers",
+  "cop_mcp_url": "http://127.0.0.1:8001",
+  "thief_mcp_url": "http://127.0.0.1:8002",
+  "timezone": "Asia/Jerusalem",
+  "sub_games": [
+    {
+      "sub_game_number": 1,
+      "winner": "cop",
+      "num_moves": 2,
+      "cop_score": 20,
+      "thief_score": 5
+    },
+    {
+      "sub_game_number": 2,
+      "winner": "cop",
+      "num_moves": 15,
+      "cop_score": 40,
+      "thief_score": 10
+    },
+    {
+      "sub_game_number": 3,
+      "winner": "cop",
+      "num_moves": 24,
+      "cop_score": 60,
+      "thief_score": 15
+    },
+    {
+      "sub_game_number": 4,
+      "winner": "cop",
+      "num_moves": 0,
+      "cop_score": 80,
+      "thief_score": 20
+    },
+    {
+      "sub_game_number": 5,
+      "winner": "thief",
+      "num_moves": 25,
+      "cop_score": 85,
+      "thief_score": 30
+    },
+    {
+      "sub_game_number": 6,
+      "winner": "cop",
+      "num_moves": 13,
+      "cop_score": 105,
+      "thief_score": 35
+    }
+  ],
+  "totals": {
+    "cop": 105,
+    "thief": 35
+  }
+}

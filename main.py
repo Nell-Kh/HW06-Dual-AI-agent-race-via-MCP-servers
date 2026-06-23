@@ -12,6 +12,7 @@ def main():
     print(f"Final scores: {results['final_scores']}")
     print("Transcript saved to results/transcript.jsonl")
     print("Cost report saved to results/cost_report.json")
+    print("Report emailed to rmisegal+uoh26b@gmail.com")
 
 
 if __name__ == "__main__":

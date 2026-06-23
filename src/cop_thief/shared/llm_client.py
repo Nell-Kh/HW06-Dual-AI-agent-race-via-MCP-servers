@@ -18,7 +18,7 @@ class LLMClient:
 
     def _build_cop_prompt(
         self, observation: str, valid_moves: list[str], history: list[str]
-    ) -> list[dict[str, str]]:
+    ) -> list[dict]:
         persona = self.cop_persona
         sys_msg = (
             f"{persona} Respond with JSON containing 'action' (direction) and 'dialogue' (quip)."
@@ -32,7 +32,7 @@ class LLMClient:
 
     def _build_thief_prompt(
         self, observation: str, valid_moves: list[str], history: list[str]
-    ) -> list[dict[str, str]]:
+    ) -> list[dict]:
         persona = self.thief_persona
         sys_msg = (
             f"{persona} Respond with JSON containing 'action' (direction) and 'dialogue' (quip)."
@@ -44,8 +44,24 @@ class LLMClient:
         )
         return [{"role": "system", "content": sys_msg}, {"role": "user", "content": user_msg}]
 
-    def _parse_direction(self, response_text: str, valid_moves: list[str]) -> str:
-        text = response_text.lower()
+    def _parse_response(self, resp_text: str, valid_moves: list[str]) -> tuple[str, str]:
+        """Extract action and dialogue from LLM JSON response."""
+        import json
+        import re
+
+        # Try to parse JSON from response
+        try:
+            # Strip markdown code blocks if present
+            clean = re.sub(r"```json\s*|\s*```", "", resp_text).strip()
+            data = json.loads(clean)
+            action = self._parse_direction(str(data.get("action", "")), valid_moves)
+            dialogue = str(data.get("dialogue", ""))
+            return action, dialogue
+        except Exception:
+            return self._parse_direction(resp_text, valid_moves), resp_text
+
+    def _parse_direction(self, text: str, valid_moves: list[str]) -> str:
+        text = text.lower()
         for d in valid_moves:
             if d in text:
                 return d
@@ -68,25 +84,26 @@ class LLMClient:
             messages = self._build_thief_prompt(observation, valid_moves, game_history)
 
         try:
-            response = self.client.chat.completions.create(
+            response = self.client.chat.completions.create(  # type: ignore
                 model=self.model,
                 messages=messages,
                 max_tokens=self.max_tokens,
                 temperature=self.temperature,
             )
             resp_text = response.choices[0].message.content or ""
+            action, dialogue = self._parse_response(resp_text, valid_moves)
             usage = response.usage
             pt = usage.prompt_tokens if usage else 0
             ct = usage.completion_tokens if usage else 0
         except Exception:
-            resp_text = ""
+            action = valid_moves[0] if valid_moves else "up"
+            dialogue = ""
             pt = 0
             ct = 0
 
-        action = self._parse_direction(resp_text, valid_moves)
         return {
             "action": action,
-            "dialogue": resp_text,
+            "dialogue": dialogue,
             "prompt_tokens": pt,
             "completion_tokens": ct,
             "model": self.model,
@@ -108,28 +125,26 @@ class LLMClient:
             f"Valid moves: {', '.join(valid_moves)}\n"
             f"Barriers remaining: {barriers_remaining}"
         )
-        messages = [{"role": "system", "content": sys_msg}, {"role": "user", "content": user_msg}]
+        messages: list[dict] = [
+            {"role": "system", "content": sys_msg},
+            {"role": "user", "content": user_msg},
+        ]
         try:
-            response = self.client.chat.completions.create(
+            response = self.client.chat.completions.create(  # type: ignore
                 model=self.model,
                 messages=messages,
                 max_tokens=self.max_tokens,
                 temperature=self.temperature,
             )
             resp_text = (response.choices[0].message.content or "").lower()
-            usage = response.usage
-            pt = usage.prompt_tokens if usage else 0
-            ct = usage.completion_tokens if usage else 0
-            if "place_barrier" in resp_text:
-                action = "place_barrier"
-            else:
-                action = self._parse_direction(resp_text, valid_moves)
+            valid_with_barrier = valid_moves + ["place_barrier"]
+            action, dialogue = self._parse_response(resp_text, valid_with_barrier)
             return {
                 "action": action,
-                "dialogue": resp_text,
-                "prompt_tokens": pt,
-                "completion_tokens": ct,
-                "model": self.model,
+                "dialogue": dialogue,
+                "prompt_tokens": response.usage.prompt_tokens if response.usage else 0,
+                "completion_tokens": response.usage.completion_tokens if response.usage else 0,
+                "model": response.model,
             }
         except Exception:
             return {

@@ -1,7 +1,9 @@
 from cop_thief.services.cost_tracker import CostTracker
+from cop_thief.services.gmail_reporter import GmailReporter
 from cop_thief.services.orchestrator import Orchestrator
 from cop_thief.services.partial_observer import PartialObserver
 from cop_thief.services.q_table import QTable
+from cop_thief.services.report_generator import ReportGenerator
 from cop_thief.services.score_manager import ScoreManager
 from cop_thief.services.transcript import TranscriptWriter
 from cop_thief.shared.api_gatekeeper import ApiGatekeeper
@@ -23,6 +25,8 @@ class GameRunner:
         self.partial_observer = PartialObserver(self.config)
         self.cost_tracker = CostTracker(self.config)
         self.transcript_writer = TranscriptWriter(self.config)
+        self.report_generator = ReportGenerator(self.config)
+        self.gmail_reporter = GmailReporter(self.config, self.secrets)
 
         # We don't actually launch the MCP servers here because fastmcp starts on run().
         # In a real setup, we'd spawn them as subprocesses. For now we pass Mocks or None.
@@ -45,6 +49,15 @@ class GameRunner:
         results = self.orchestrator.run_game()
         self.cost_tracker.save_report()
         self.transcript_writer.save()
+
+        # Build and send report
+        scores = self.get_final_scores()
+        report = self.report_generator.build_report(
+            results["sub_games"], scores["cop"], scores["thief"]
+        )
+        self.report_generator.save_report(report)
+        self.gmail_reporter.send_report(report)
+
         return results
 
     def get_final_scores(self) -> dict:

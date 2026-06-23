@@ -45,7 +45,7 @@ class CostTracker:
             "total_cost_usd": total_cost,
         }
 
-    def save_report(self, path: str = None) -> None:
+    def save_report(self, path: str | None = None) -> None:
         if not self.enabled:
             return
         p = path or self.log_path
