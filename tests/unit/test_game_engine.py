@@ -118,7 +118,7 @@ def test_move_validator_get_valid_moves_corner(mock_config):
     val = MoveValidator(grid)
     thief = Thief("thief", 0, 0)
     moves = val.get_valid_moves(thief)
-    assert sorted(moves) == ["down", "right"]
+    assert sorted(moves) == ["down", "down-right", "right"]
 
 
 def test_score_manager_cop_win(mock_config):
@@ -158,3 +158,29 @@ def test_game_state_timeout_detection(mock_config):
 def test_game_state_thief_moves_first(mock_config):
     gs = GameState(mock_config)
     assert gs.thief_moves_first is True
+
+def test_move_validator_diagonal_valid(mock_config):
+    grid = Grid(mock_config)
+    val = MoveValidator(grid)
+    thief = Thief("thief", 2, 2)
+    assert val.is_valid_move(thief, "up-left") is True
+    assert val.is_valid_move(thief, "down-right") is True
+
+def test_move_validator_diagonal_blocked_by_barrier(mock_config):
+    grid = Grid(mock_config)
+    grid.place_barrier(1, 1)
+    val = MoveValidator(grid)
+    thief = Thief("thief", 2, 2)
+    assert val.is_valid_move(thief, "up-left") is False
+
+def test_move_validator_diagonal_blocked_by_boundary(mock_config):
+    grid = Grid(mock_config)
+    val = MoveValidator(grid)
+    thief = Thief("thief", 0, 0)
+    assert val.is_valid_move(thief, "up-left") is False
+
+def test_qtable_8_actions(mock_config):
+    from cop_thief.services.q_table import QTable
+    qt = QTable(mock_config)
+    assert qt.num_actions == 8
+    assert qt.action_to_idx["down-right"] == 7

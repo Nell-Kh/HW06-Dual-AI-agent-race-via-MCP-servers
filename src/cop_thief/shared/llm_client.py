@@ -70,20 +70,9 @@ class LLMClient:
         if barriers_remaining <= 0:
             return self.generate_move("cop", cop_observation, valid_moves, [])
 
-        persona = self.cop_persona
-        sys_msg = (
-            f"{persona} "
-            "Respond with JSON containing 'action' (direction or 'place_barrier') and 'dialogue'."
+        messages = self.prompt_builder.build_cop_prompt(
+            cop_observation, valid_moves, [], barriers_remaining
         )
-        user_msg = (
-            f"Observation: {cop_observation}\n"
-            f"Valid moves: {', '.join(valid_moves)}\n"
-            f"Barriers remaining: {barriers_remaining}"
-        )
-        messages: list[dict] = [
-            {"role": "system", "content": sys_msg},
-            {"role": "user", "content": user_msg},
-        ]
         try:
             response = self.client.chat.completions.create(  # type: ignore
                 model=self.model,

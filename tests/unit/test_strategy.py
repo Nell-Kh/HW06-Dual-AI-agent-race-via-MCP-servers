@@ -71,13 +71,14 @@ def test_thief_best_move_moves_away(mock_config):
     thief = Thief("thief", 2, 2)
     cop = Cop("cop", 0, 2, mock_config)
     best_move = h.get_best_thief_move(thief, cop, val)
-    assert best_move in ["down", "left", "right"]
+    assert best_move in ["down", "left", "right", "down-left", "down-right"]
 
 
 def test_thief_trapped_returns_none(mock_config):
     grid = Grid(mock_config)
     grid.place_barrier(0, 1)
     grid.place_barrier(1, 0)
+    grid.place_barrier(1, 1)
     val = MoveValidator(grid)
     h = ManhattanHeuristic(grid)
     thief = Thief("thief", 0, 0)

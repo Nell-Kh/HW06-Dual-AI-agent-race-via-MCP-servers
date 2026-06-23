@@ -128,9 +128,10 @@ class Orchestrator:
             if not game.grid.is_barrier(row, col):
                 game.grid.place_barrier(row, col)
         else:
-            dr, dc = {"up": (-1, 0), "down": (1, 0), "left": (0, -1), "right": (0, 1)}.get(
-                action, (0, 0)
-            )
+            dr, dc = {
+                "up": (-1, 0), "down": (1, 0), "left": (0, -1), "right": (0, 1),
+                "up-left": (-1, -1), "up-right": (-1, 1), "down-left": (1, -1), "down-right": (1, 1)
+            }.get(action, (0, 0))
             nr, nc = entity.row + dr, entity.col + dc
             if 0 <= nr < game.grid.rows and 0 <= nc < game.grid.cols:
                 entity.move(nr, nc)
@@ -139,7 +140,10 @@ class Orchestrator:
         caught = c_pos == t_pos
         state_int_after = self.q_table.encode_state(c_pos, t_pos, g_sz)
         # Only update Q-table for movement actions, not barrier placement
-        if action in ("up", "down", "left", "right"):
+        if action in (
+            "up", "down", "left", "right",
+            "up-left", "up-right", "down-left", "down-right"
+        ):
             self.q_table.update_bellman(
                 state_int_before, action, 10 if caught else -1, state_int_after, caught
             )

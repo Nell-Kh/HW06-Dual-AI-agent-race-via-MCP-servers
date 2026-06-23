@@ -26,6 +26,7 @@
     "host": "127.0.0.1"
   },
   "rl": {
+    "num_actions": 8,
     "learning_rate": 0.1,
     "discount_factor": 0.9,
     "epsilon": 0.2

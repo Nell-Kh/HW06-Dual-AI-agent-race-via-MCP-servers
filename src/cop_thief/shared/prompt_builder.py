@@ -8,30 +8,61 @@ class PromptBuilder:
         self.thief_persona = thief_persona
 
     def build_cop_prompt(
-        self, observation: str, valid_moves: list[str], history: list[str]
+        self,
+        observation: str,
+        valid_moves: list[str],
+        history: list[str],
+        barriers_remaining: int = 0,
     ) -> list[dict]:
-        persona = self.cop_persona
         sys_msg = (
-            f"{persona} Respond with JSON containing 'action' (direction) and 'dialogue' (quip)."
+            "You are Detective Marlowe, a relentless cop on a 5x5 grid chasing a thief.\n"
+            "STRATEGY: You MUST close the distance to the thief every turn.\n"
+            "- If you detect the thief's direction, move toward them immediately.\n"
+            "- Use barriers to block the thief's escape routes, not randomly.\n"
+            "- NEVER move away from the thief's last known position.\n"
+            "- You win by occupying the same cell as the thief.\n"
+            'Respond with JSON: {"action": '
+            '"up/down/left/right/up-left/up-right/down-left/down-right/place_barrier", '
+            '"dialogue": "short quip"}'
         )
         user_msg = (
-            f"Observation: {observation}\n"
-            f"Valid moves: {', '.join(valid_moves)}\n"
-            f"History: {', '.join(history) if history else 'None'}"
+            f"You are at position described as: {observation}\n"
+            f"Valid moves: {valid_moves}\n"
+            f"GOAL: Move toward the thief. Choose the move that REDUCES distance to the thief.\n"
+            "If the thief is north, go up. If east, go right. "
+            "If south, go down. If west, go left. "
+            "If north-east, go up-right. If south-west, go down-left.\n"
+            f"Recent history: {history}\n"
         )
+        if barriers_remaining > 0:
+            user_msg += f"Barriers remaining: {barriers_remaining}\n"
+        user_msg += "Respond with JSON only."
+
         return [{"role": "system", "content": sys_msg}, {"role": "user", "content": user_msg}]
 
     def build_thief_prompt(
         self, observation: str, valid_moves: list[str], history: list[str]
     ) -> list[dict]:
-        persona = self.thief_persona
         sys_msg = (
-            f"{persona} Respond with JSON containing 'action' (direction) and 'dialogue' (quip)."
+            "You are The Shadow, a cunning thief on a 5x5 grid evading a cop.\n"
+            "STRATEGY: You MUST maximize distance from the cop every turn.\n"
+            "- NEVER move toward the cop \u2014 always flee.\n"
+            "- If the cop is north, go south. If east, go west.\n"
+            "- Use the full grid \u2014 move to corners and edges to maximize escape routes.\n"
+            "- You win by surviving 25 moves without being caught.\n"
+            "NEVER walk toward the cop. Survival is everything.\n"
+            'Respond with JSON: {"action": '
+            '"up/down/left/right/up-left/up-right/down-left/down-right", '
+            '"dialogue": "witty quip"}'
         )
         user_msg = (
-            f"Observation: {observation}\n"
-            f"Valid moves: {', '.join(valid_moves)}\n"
-            f"History: {', '.join(history) if history else 'None'}"
+            f"You are at position: {observation}\n"
+            f"Valid moves: {valid_moves}\n"
+            f"GOAL: Move AWAY from the cop. Choose the move that INCREASES distance from the cop.\n"
+            "If cop is north, go south. If east, go west. If south, go north. If west, go east. "
+            "If north-east, go down-left to flee. If south-west, go up-right.\n"
+            f"Recent history: {history}\n"
+            "Respond with JSON only."
         )
         return [{"role": "system", "content": sys_msg}, {"role": "user", "content": user_msg}]
 

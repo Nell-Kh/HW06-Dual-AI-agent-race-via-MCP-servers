@@ -16,7 +16,10 @@ class MoveValidator:
         return not self.grid.is_barrier(new_row, new_col)
 
     def get_valid_moves(self, entity: Entity) -> list[str]:
-        directions = ["up", "down", "left", "right"]
+        directions = [
+            "up", "down", "left", "right",
+            "up-left", "up-right", "down-left", "down-right"
+        ]
         return [d for d in directions if self.is_valid_move(entity, d)]
 
     def apply_move(self, entity: Entity, direction: str) -> None:
@@ -26,7 +29,10 @@ class MoveValidator:
         entity.move(entity.row + dr, entity.col + dc)
 
     def _get_delta(self, direction: str) -> tuple[int, int]:
-        deltas = {"up": (-1, 0), "down": (1, 0), "left": (0, -1), "right": (0, 1)}
+        deltas = {
+            "up": (-1, 0), "down": (1, 0), "left": (0, -1), "right": (0, 1),
+            "up-left": (-1, -1), "up-right": (-1, 1), "down-left": (1, -1), "down-right": (1, 1)
+        }
         if direction not in deltas:
             raise ValueError("Invalid direction")
         return deltas[direction]

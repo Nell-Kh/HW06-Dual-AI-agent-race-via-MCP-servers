@@ -10,16 +10,19 @@ class QTable:
     def __init__(self, config: ConfigLoader):
         grid_size = config.get_grid_size()
         self.num_states = grid_size[0] * grid_size[1]
-        self.num_actions = 4
-
         rl_config = config.get_rl_config()
+        self.num_actions = rl_config.get("num_actions", 8)
+
         self.learning_rate = rl_config["learning_rate"]
         self.discount_factor = rl_config["discount_factor"]
         self.epsilon = rl_config["epsilon"]
 
         self.table = np.zeros((self.num_states, self.num_actions))
-        self.action_to_idx = {"up": 0, "down": 1, "left": 2, "right": 3}
-        self.idx_to_action = {0: "up", 1: "down", 2: "left", 3: "right"}
+        self.action_to_idx = {
+            "up": 0, "down": 1, "left": 2, "right": 3,
+            "up-left": 4, "up-right": 5, "down-left": 6, "down-right": 7
+        }
+        self.idx_to_action = {v: k for k, v in self.action_to_idx.items()}
 
     def encode_state(
         self, entity_pos: tuple[int, int], opponent_pos: tuple[int, int], grid_size: list[int]
