@@ -1,6 +1,7 @@
 import openai
 
 from cop_thief.shared.config_loader import ConfigLoader
+from cop_thief.shared.prompt_builder import PromptBuilder
 from cop_thief.shared.secrets_manager import SecretsManager
 
 
@@ -15,57 +16,7 @@ class LLMClient:
         personas = config.get_config().get("personas", {})
         self.cop_persona = personas.get("cop", "You are Detective Marlowe, a relentless cop.")
         self.thief_persona = personas.get("thief", "You are The Shadow, a cunning thief.")
-
-    def _build_cop_prompt(
-        self, observation: str, valid_moves: list[str], history: list[str]
-    ) -> list[dict]:
-        persona = self.cop_persona
-        sys_msg = (
-            f"{persona} Respond with JSON containing 'action' (direction) and 'dialogue' (quip)."
-        )
-        user_msg = (
-            f"Observation: {observation}\n"
-            f"Valid moves: {', '.join(valid_moves)}\n"
-            f"History: {', '.join(history) if history else 'None'}"
-        )
-        return [{"role": "system", "content": sys_msg}, {"role": "user", "content": user_msg}]
-
-    def _build_thief_prompt(
-        self, observation: str, valid_moves: list[str], history: list[str]
-    ) -> list[dict]:
-        persona = self.thief_persona
-        sys_msg = (
-            f"{persona} Respond with JSON containing 'action' (direction) and 'dialogue' (quip)."
-        )
-        user_msg = (
-            f"Observation: {observation}\n"
-            f"Valid moves: {', '.join(valid_moves)}\n"
-            f"History: {', '.join(history) if history else 'None'}"
-        )
-        return [{"role": "system", "content": sys_msg}, {"role": "user", "content": user_msg}]
-
-    def _parse_response(self, resp_text: str, valid_moves: list[str]) -> tuple[str, str]:
-        """Extract action and dialogue from LLM JSON response."""
-        import json
-        import re
-
-        # Try to parse JSON from response
-        try:
-            # Strip markdown code blocks if present
-            clean = re.sub(r"```json\s*|\s*```", "", resp_text).strip()
-            data = json.loads(clean)
-            action = self._parse_direction(str(data.get("action", "")), valid_moves)
-            dialogue = str(data.get("dialogue", ""))
-            return action, dialogue
-        except Exception:
-            return self._parse_direction(resp_text, valid_moves), resp_text
-
-    def _parse_direction(self, text: str, valid_moves: list[str]) -> str:
-        text = text.lower()
-        for d in valid_moves:
-            if d in text:
-                return d
-        return valid_moves[0] if valid_moves else "up"
+        self.prompt_builder = PromptBuilder(self.cop_persona, self.thief_persona)
 
     def generate_move(
         self, agent_name: str, observation: str, valid_moves: list[str], game_history: list[str]
@@ -79,9 +30,13 @@ class LLMClient:
                 "model": self.model,
             }
         if agent_name == "cop":
-            messages = self._build_cop_prompt(observation, valid_moves, game_history)
+            messages = self.prompt_builder.build_cop_prompt(
+                observation, valid_moves, game_history
+            )
         else:
-            messages = self._build_thief_prompt(observation, valid_moves, game_history)
+            messages = self.prompt_builder.build_thief_prompt(
+                observation, valid_moves, game_history
+            )
 
         try:
             response = self.client.chat.completions.create(  # type: ignore
@@ -91,7 +46,7 @@ class LLMClient:
                 temperature=self.temperature,
             )
             resp_text = response.choices[0].message.content or ""
-            action, dialogue = self._parse_response(resp_text, valid_moves)
+            action, dialogue = self.prompt_builder.parse_response(resp_text, valid_moves)
             usage = response.usage
             pt = usage.prompt_tokens if usage else 0
             ct = usage.completion_tokens if usage else 0
@@ -138,7 +93,7 @@ class LLMClient:
             )
             resp_text = (response.choices[0].message.content or "").lower()
             valid_with_barrier = valid_moves + ["place_barrier"]
-            action, dialogue = self._parse_response(resp_text, valid_with_barrier)
+            action, dialogue = self.prompt_builder.parse_response(resp_text, valid_with_barrier)
             return {
                 "action": action,
                 "dialogue": dialogue,

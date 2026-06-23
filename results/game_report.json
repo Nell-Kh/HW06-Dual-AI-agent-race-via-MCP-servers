@@ -15,10 +15,10 @@
     },
     {
       "sub_game_number": 2,
-      "winner": "cop",
-      "num_moves": 5,
-      "cop_score": 20,
-      "thief_score": 5
+      "winner": "thief",
+      "num_moves": 25,
+      "cop_score": 5,
+      "thief_score": 10
     },
     {
       "sub_game_number": 3,
@@ -30,16 +30,16 @@
     {
       "sub_game_number": 4,
       "winner": "cop",
-      "num_moves": 3,
+      "num_moves": 2,
       "cop_score": 20,
       "thief_score": 5
     },
     {
       "sub_game_number": 5,
-      "winner": "thief",
-      "num_moves": 25,
-      "cop_score": 5,
-      "thief_score": 10
+      "winner": "cop",
+      "num_moves": 2,
+      "cop_score": 20,
+      "thief_score": 5
     },
     {
       "sub_game_number": 6,

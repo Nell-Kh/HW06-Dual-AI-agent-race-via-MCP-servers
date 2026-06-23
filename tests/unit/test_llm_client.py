@@ -78,7 +78,7 @@ def test_generate_move_case_insensitive(mock_config, mock_secrets):
 
 def test_parse_direction_finds_direction_in_sentence(mock_config, mock_secrets):
     client = LLMClient(mock_config, mock_secrets)
-    result = client._parse_direction("I should go up now", ["up", "down"])
+    result = client.prompt_builder.parse_direction("I should go up now", ["up", "down"])
     assert result == "up"
 
 
