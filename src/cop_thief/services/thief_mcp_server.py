@@ -11,7 +11,11 @@ class ThiefMCPServer:
         @self.app.tool()
         def move(direction: str) -> str:
             """Move the thief in a direction."""
-            if direction not in ["up", "down", "left", "right"]:
+            valid = [
+                "up", "down", "left", "right",
+                "up-left", "up-right", "down-left", "down-right"
+            ]
+            if direction not in valid:
                 return "Invalid direction"
             return f"Thief moved {direction}"
 
@@ -26,7 +30,7 @@ class ThiefMCPServer:
         @self.app.tool()
         def get_valid_moves() -> list[str]:
             """Get valid moves."""
-            return ["up", "down", "left", "right"]
+            return ["up", "down", "left", "right", "up-left", "up-right", "down-left", "down-right"]
 
         # Store for testing
         self._observe = observe

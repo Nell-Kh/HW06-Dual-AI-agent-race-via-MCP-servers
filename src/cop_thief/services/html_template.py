@@ -1,3 +1,4 @@
+# ruff: noqa: E501, W293
 HTML_TEMPLATE = """
 <!DOCTYPE html>
 <html>
@@ -6,38 +7,123 @@ HTML_TEMPLATE = """
     <title>Game Replay</title>
     <style>
         body {
-            font-family: 'Inter', sans-serif; background: #121212;
-            color: #fff; text-align: center;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+            color: #f8fafc;
+            text-align: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            font-weight: 800;
+            background: -webkit-linear-gradient(#60a5fa, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 5px;
         }
         #grid {
-            display: grid; grid-template-columns: repeat({cols}, 50px);
-            grid-template-rows: repeat({rows}, 50px); gap: 2px;
-            margin: 20px auto; width: max-content;
+            display: grid;
+            grid-template-columns: repeat({cols}, 60px);
+            grid-template-rows: repeat({rows}, 60px);
+            gap: 4px;
+            margin: 30px auto;
+            width: max-content;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px;
+            border-radius: 16px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
         .cell {
-            width: 50px; height: 50px; background: #2a2a2a; display: flex; align-items: center;
-            justify-content: center; font-size: 24px; border-radius: 4px;
+            width: 60px; height: 60px;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 32px;
+            border-radius: 8px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
         }
-        .cell.barrier { background: #444; }
+        .cell.barrier {
+            background: rgba(71, 85, 105, 0.8);
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+        }
+        .entity {
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        }
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
         .controls {
-            margin: 20px; display: flex; gap: 10px;
+            margin: 20px; display: flex; gap: 15px;
             justify-content: center; align-items: center;
+            background: rgba(0, 0, 0, 0.2);
+            padding: 15px;
+            border-radius: 12px;
+            width: max-content;
+            margin: 0 auto;
         }
         button, select, input {
-            padding: 8px 16px; background: #333; color: white; border: none;
-            border-radius: 4px; cursor: pointer;
+            padding: 10px 20px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s ease;
         }
-        button:hover { background: #555; }
+        button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
         .dialogue-box {
-            background: #222; padding: 20px; border-radius: 8px; max-width: 600px;
-            margin: 0 auto; min-height: 80px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 25px;
+            border-radius: 16px;
+            max-width: 600px;
+            margin: 30px auto;
+            min-height: 100px;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            backdrop-filter: blur(8px);
+            transition: all 0.3s ease;
+        }
+        .dialogue-box.cop {
+            border-left: 4px solid #60a5fa;
+            background: rgba(30, 58, 138, 0.4);
+        }
+        .dialogue-box.thief {
+            border-left: 4px solid #f87171;
+            background: rgba(127, 29, 29, 0.4);
         }
         .agent-name {
-            font-weight: bold; margin-bottom: 8px; color: #aaa; text-transform: uppercase;
+            font-weight: 800; margin-bottom: 12px;
+            text-transform: uppercase; letter-spacing: 2px;
+            font-size: 0.9rem;
         }
-        .dialogue-text { font-style: italic; }
+        .cop .agent-name { color: #93c5fd; }
+        .thief .agent-name { color: #fca5a5; }
+        .dialogue-text {
+            font-size: 1.2rem;
+            font-style: italic;
+            line-height: 1.5;
+        }
         .info-panel {
-            display: flex; justify-content: center; gap: 40px; margin: 20px; font-size: 1.2rem;
+            display: flex; justify-content: center; gap: 40px;
+            margin: 20px auto; font-size: 1.1rem;
+            background: rgba(255,255,255,0.05);
+            padding: 15px 30px;
+            border-radius: 12px;
+            width: max-content;
+        }
+        .info-panel span {
+            font-weight: bold;
+            color: #c084fc;
         }
     </style>
 </head>
@@ -46,9 +132,7 @@ HTML_TEMPLATE = """
     <div class="info-panel">
         <div>Sub-game: <span id="sg-display">1</span></div>
         <div>Turn: <span id="turn-display">0</span></div>
-        <div>
-            Score - Cop: <span id="score-cop">0</span> | Thief: <span id="score-thief">0</span>
-        </div>
+        <div>Cop Score: <span id="score-cop">0</span> | Thief Score: <span id="score-thief">0</span></div>
     </div>
 
     <div class="controls">
@@ -61,7 +145,7 @@ HTML_TEMPLATE = """
 
     <div id="grid"></div>
 
-    <div class="dialogue-box">
+    <div class="dialogue-box" id="dialogue-container">
         <div class="agent-name" id="agent-label">System</div>
         <div class="dialogue-text" id="dialogue-display">Ready to replay.</div>
     </div>
@@ -76,7 +160,6 @@ HTML_TEMPLATE = """
 
         let copScore = 0;
         let thiefScore = 0;
-        let processedSubgames = new Set();
 
         const subgames = [...new Set(frames.map(f => f.sub_game))];
         const sgSelect = document.getElementById('sg-select');
@@ -111,8 +194,7 @@ HTML_TEMPLATE = """
                     currentSg = f.sub_game;
                     isCaptured = false;
                 }
-
-                if (f.cop_pos[0] === f.thief_pos[0] && f.cop_pos[1] === f.thief_pos[1]) {
+                if (f.cop_pos && f.thief_pos && f.cop_pos[0] === f.thief_pos[0] && f.cop_pos[1] === f.thief_pos[1]) {
                     isCaptured = true;
                 }
             }
@@ -129,24 +211,36 @@ HTML_TEMPLATE = """
             for (let i = 0; i < rows * cols; i++) {
                 const cell = document.getElementById('cell-' + i);
                 cell.className = 'cell';
-                cell.textContent = '';
+                cell.innerHTML = '';
             }
 
-            f.barriers.forEach(b => {
-                const c = document.getElementById('cell-' + (b[0]*cols + b[1]));
-                if (c) { c.className = 'cell barrier'; c.textContent = '🧱'; }
-            });
+            if(f.barriers) {
+                f.barriers.forEach(b => {
+                    const c = document.getElementById('cell-' + (b[0]*cols + b[1]));
+                    if (c) { c.className = 'cell barrier'; c.textContent = '🧱'; }
+                });
+            }
 
-            const tc = document.getElementById('cell-' + (f.thief_pos[0]*cols + f.thief_pos[1]));
-            if (tc) tc.textContent = '🦹';
+            if(f.thief_pos) {
+                const tc = document.getElementById('cell-' + (f.thief_pos[0]*cols + f.thief_pos[1]));
+                if (tc) tc.innerHTML = '<span class="entity">🦹</span>';
+            }
 
-            const cc = document.getElementById('cell-' + (f.cop_pos[0]*cols + f.cop_pos[1]));
-            if (cc) cc.textContent = '🚔';
+            if(f.cop_pos) {
+                const cc = document.getElementById('cell-' + (f.cop_pos[0]*cols + f.cop_pos[1]));
+                if (cc) cc.innerHTML = '<span class="entity">🚔</span>';
+            }
 
             document.getElementById('sg-display').textContent = f.sub_game;
-            document.getElementById('turn-display').textContent = f.turn;
-            document.getElementById('agent-label').textContent = f.agent || 'System';
+            document.getElementById('turn-display').textContent = f.turn || 0;
+            
+            const agent = f.agent || 'System';
+            document.getElementById('agent-label').textContent = agent;
             document.getElementById('dialogue-display').textContent = f.dialogue || '...';
+            
+            const dialogBox = document.getElementById('dialogue-container');
+            dialogBox.className = 'dialogue-box ' + agent.toLowerCase();
+
             document.getElementById('score-cop').textContent = copScore;
             document.getElementById('score-thief').textContent = thiefScore;
         }
@@ -167,8 +261,8 @@ HTML_TEMPLATE = """
             if (isPlaying) return pause();
             isPlaying = true;
             document.getElementById('btn-play').textContent = '⏸ Pause';
-            const speedMap = {1: 1000, 2: 500, 3: 200};
-            const ms = speedMap[document.getElementById('speed').value] || 500;
+            const speedMap = {1: 800, 2: 400, 3: 150};
+            const ms = speedMap[document.getElementById('speed').value] || 400;
             playInterval = setInterval(nextFrame, ms);
         }
 
@@ -179,20 +273,14 @@ HTML_TEMPLATE = """
         }
 
         document.getElementById('btn-play').addEventListener('click', play);
-        document.getElementById('btn-forward').addEventListener('click', () => {
-            pause(); nextFrame();
-        });
-        document.getElementById('btn-back').addEventListener('click', () => {
-            pause(); prevFrame();
-        });
-
+        document.getElementById('btn-forward').addEventListener('click', () => { pause(); nextFrame(); });
+        document.getElementById('btn-back').addEventListener('click', () => { pause(); prevFrame(); });
         sgSelect.addEventListener('change', (e) => {
             pause();
             const targetSg = parseInt(e.target.value);
             const idx = frames.findIndex(f => f.sub_game === targetSg);
             if (idx !== -1) renderFrame(idx);
         });
-
         document.getElementById('speed').addEventListener('change', () => {
             if (isPlaying) { pause(); play(); }
         });
