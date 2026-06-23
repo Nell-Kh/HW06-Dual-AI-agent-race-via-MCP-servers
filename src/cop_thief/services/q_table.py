@@ -9,7 +9,7 @@ from cop_thief.shared.config_loader import ConfigLoader
 class QTable:
     def __init__(self, config: ConfigLoader):
         grid_size = config.get_grid_size()
-        self.num_states = grid_size[0] * grid_size[1]
+        self.num_states = (grid_size[0] * grid_size[1]) ** 2
         rl_config = config.get_rl_config()
         self.num_actions = rl_config.get("num_actions", 8)
 
@@ -28,8 +28,14 @@ class QTable:
         self, entity_pos: tuple[int, int], opponent_pos: tuple[int, int], grid_size: list[int]
     ) -> int:
         r, c = entity_pos
+        op_r, op_c = opponent_pos
         cols = grid_size[1]
-        return r * cols + c
+
+        entity_idx = r * cols + c
+        opponent_idx = op_r * cols + op_c
+
+        total_cells = grid_size[0] * grid_size[1]
+        return entity_idx * total_cells + opponent_idx
 
     def get_q_value(self, state: int, action: str) -> float:
         a_idx = self.action_to_idx[action]
@@ -77,7 +83,13 @@ class QTable:
     def load(self, path: str = "results/q_table.npy") -> None:
         if not os.path.exists(path):
             raise FileNotFoundError(f"Q-table file not found: {path}")
-        self.table = np.load(path)
+        loaded_table = np.load(path)
+        if loaded_table.shape != (self.num_states, self.num_actions):
+            expected = (self.num_states, self.num_actions)
+            print(f"Warning: Shape {loaded_table.shape} doesn't match {expected}. Resetting.")
+            self.reset()
+        else:
+            self.table = loaded_table
 
     def reset(self) -> None:
         self.table = np.zeros((self.num_states, self.num_actions))

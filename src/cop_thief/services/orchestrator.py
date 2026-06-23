@@ -1,3 +1,5 @@
+import contextlib
+
 from cop_thief.services.cost_tracker import CostTracker
 from cop_thief.services.game_state import GameState
 from cop_thief.services.html_replay import HTMLReplay
@@ -135,14 +137,9 @@ class Orchestrator:
             row, col = game.cop.row, game.cop.col
             if not game.grid.is_barrier(row, col):
                 game.grid.place_barrier(row, col)
-        else:
-            dr, dc = {
-                "up": (-1, 0), "down": (1, 0), "left": (0, -1), "right": (0, 1),
-                "up-left": (-1, -1), "up-right": (-1, 1), "down-left": (1, -1), "down-right": (1, 1)
-            }.get(action, (0, 0))
-            nr, nc = entity.row + dr, entity.col + dc
-            if 0 <= nr < game.grid.rows and 0 <= nc < game.grid.cols:
-                entity.move(nr, nc)
+        elif action != "place_barrier":
+            with contextlib.suppress(ValueError):
+                validator.apply_move(entity, action)
 
         c_pos, t_pos = (game.cop.row, game.cop.col), (game.thief.row, game.thief.col)
         caught = c_pos == t_pos
@@ -159,7 +156,7 @@ class Orchestrator:
         opponent_name = "thief" if agent_name == "cop" else "cop"
         opp_msg = self.last_dialogue.get(opponent_name, "")
         entry = f"T{turn}: I moved {action} | saw {obs} | opponent said: '{opp_msg}'"
-        
+
         if agent_name == "cop":
             self.cop_history.append(entry)
             if len(self.cop_history) > 4:

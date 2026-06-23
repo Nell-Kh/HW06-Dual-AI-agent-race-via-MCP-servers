@@ -53,7 +53,8 @@ def create_mock_response(content):
 
 
 def test_generate_move_valid_direction(mock_config, mock_secrets):
-    client = LLMClient(mock_config, mock_secrets)
+    gatekeeper = ApiGatekeeper(mock_config)
+    client = LLMClient(mock_config, mock_secrets, gatekeeper)
     with patch.object(client.client.chat.completions, "create") as mock_create:
         mock_create.return_value = create_mock_response("up")
         result = client.generate_move("cop", "obs", ["up", "down"], [])
@@ -61,7 +62,8 @@ def test_generate_move_valid_direction(mock_config, mock_secrets):
 
 
 def test_generate_move_invalid_response(mock_config, mock_secrets):
-    client = LLMClient(mock_config, mock_secrets)
+    gatekeeper = ApiGatekeeper(mock_config)
+    client = LLMClient(mock_config, mock_secrets, gatekeeper)
     with patch.object(client.client.chat.completions, "create") as mock_create:
         mock_create.return_value = create_mock_response("banana")
         result = client.generate_move("cop", "obs", ["left", "right"], [])
@@ -69,7 +71,8 @@ def test_generate_move_invalid_response(mock_config, mock_secrets):
 
 
 def test_generate_move_case_insensitive(mock_config, mock_secrets):
-    client = LLMClient(mock_config, mock_secrets)
+    gatekeeper = ApiGatekeeper(mock_config)
+    client = LLMClient(mock_config, mock_secrets, gatekeeper)
     with patch.object(client.client.chat.completions, "create") as mock_create:
         mock_create.return_value = create_mock_response("UP")
         result = client.generate_move("cop", "obs", ["up", "down"], [])
@@ -77,13 +80,15 @@ def test_generate_move_case_insensitive(mock_config, mock_secrets):
 
 
 def test_parse_direction_finds_direction_in_sentence(mock_config, mock_secrets):
-    client = LLMClient(mock_config, mock_secrets)
+    gatekeeper = ApiGatekeeper(mock_config)
+    client = LLMClient(mock_config, mock_secrets, gatekeeper)
     result = client.prompt_builder.parse_direction("I should go up now", ["up", "down"])
     assert result == "up"
 
 
 def test_barrier_decision_returns_valid_action(mock_config, mock_secrets):
-    client = LLMClient(mock_config, mock_secrets)
+    gatekeeper = ApiGatekeeper(mock_config)
+    client = LLMClient(mock_config, mock_secrets, gatekeeper)
     with patch.object(client.client.chat.completions, "create") as mock_create:
         mock_create.return_value = create_mock_response("place_barrier")
         result = client.generate_barrier_decision("obs", ["up", "down"], 5)

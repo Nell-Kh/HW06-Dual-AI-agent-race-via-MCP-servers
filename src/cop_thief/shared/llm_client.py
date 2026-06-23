@@ -1,12 +1,14 @@
 import openai
 
+from cop_thief.shared.api_gatekeeper import ApiGatekeeper
 from cop_thief.shared.config_loader import ConfigLoader
 from cop_thief.shared.prompt_builder import PromptBuilder
 from cop_thief.shared.secrets_manager import SecretsManager
 
 
 class LLMClient:
-    def __init__(self, config: ConfigLoader, secrets: SecretsManager):
+    def __init__(self, config: ConfigLoader, secrets: SecretsManager, gatekeeper: ApiGatekeeper):
+        self.gatekeeper = gatekeeper
         self.client = openai.OpenAI(api_key=secrets.get_openai_key())
         llm_config = config.get_llm_config()
         self.model = llm_config["model"]
@@ -39,15 +41,16 @@ class LLMClient:
             )
 
         try:
-            response = self.client.chat.completions.create(  # type: ignore
+            response = self.gatekeeper.execute(
+                self.client.chat.completions.create,
                 model=self.model,
                 messages=messages,
                 max_tokens=self.max_tokens,
                 temperature=self.temperature,
             )
-            resp_text = response.choices[0].message.content or ""
+            resp_text = response.choices[0].message.content or ""  # type: ignore
             action, dialogue = self.prompt_builder.parse_response(resp_text, valid_moves)
-            usage = response.usage
+            usage = response.usage  # type: ignore
             pt = usage.prompt_tokens if usage else 0
             ct = usage.completion_tokens if usage else 0
         except Exception:
@@ -80,21 +83,22 @@ class LLMClient:
             cop_observation, valid_moves, history, barriers_remaining
         )
         try:
-            response = self.client.chat.completions.create(  # type: ignore
+            response = self.gatekeeper.execute(
+                self.client.chat.completions.create,
                 model=self.model,
                 messages=messages,
                 max_tokens=self.max_tokens,
                 temperature=self.temperature,
             )
-            resp_text = (response.choices[0].message.content or "").lower()
+            resp_text = (response.choices[0].message.content or "").lower()  # type: ignore
             valid_with_barrier = valid_moves + ["place_barrier"]
             action, dialogue = self.prompt_builder.parse_response(resp_text, valid_with_barrier)
             return {
                 "action": action,
                 "dialogue": dialogue,
-                "prompt_tokens": response.usage.prompt_tokens if response.usage else 0,
-                "completion_tokens": response.usage.completion_tokens if response.usage else 0,
-                "model": response.model,
+                "prompt_tokens": response.usage.prompt_tokens if response.usage else 0,  # type: ignore
+                "completion_tokens": response.usage.completion_tokens if response.usage else 0,  # type: ignore
+                "model": response.model,  # type: ignore
             }
         except Exception:
             return {

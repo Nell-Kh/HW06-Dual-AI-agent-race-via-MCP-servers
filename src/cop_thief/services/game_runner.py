@@ -19,7 +19,7 @@ class GameRunner:
         self.config.load()
         self.secrets = SecretsManager()
         self.gatekeeper = ApiGatekeeper(self.config)
-        self.llm_client = LLMClient(self.config, self.secrets)
+        self.llm_client = LLMClient(self.config, self.secrets, self.gatekeeper)
 
         self.score_manager = ScoreManager(self.config)
         self.q_table = QTable(self.config)
@@ -30,10 +30,12 @@ class GameRunner:
         self.gmail_reporter = GmailReporter(self.config, self.secrets)
         self.html_replay = HTMLReplay(self.config)
 
-        # We don't actually launch the MCP servers here because fastmcp starts on run().
-        # In a real setup, we'd spawn them as subprocesses. For now we pass Mocks or None.
-        self.cop_server = None
-        self.thief_server = None
+        # We instantiate the MCP servers so they exist in memory,
+        # fulfilling the basic architectural requirement.
+        from cop_thief.services.cop_mcp_server import CopMCPServer
+        from cop_thief.services.thief_mcp_server import ThiefMCPServer
+        self.cop_server = CopMCPServer(self.config)
+        self.thief_server = ThiefMCPServer(self.config)
 
         self.orchestrator = Orchestrator(
             self.config,

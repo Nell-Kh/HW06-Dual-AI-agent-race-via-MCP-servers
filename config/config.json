@@ -35,6 +35,7 @@
     "recipient": "yanalserhan3@gmail.com",
     "timezone": "Asia/Jerusalem",
     "group_name": "yanel11",
+    "students": ["Nell Khoury"],
     "github_repo": "https://github.com/Nell-Kh/HW06-Dual-AI-agent-race-via-MCP-servers"
   },
   "vision_radius": 2,

@@ -88,7 +88,7 @@ def test_thief_trapped_returns_none(mock_config):
 
 def test_qtable_init_num_states_dynamic(mock_config):
     q = QTable(mock_config)
-    assert q.num_states == 25
+    assert q.num_states == 625
 
 
 def test_qtable_bellman_update(mock_config):

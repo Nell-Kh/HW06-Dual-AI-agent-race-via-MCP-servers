@@ -49,7 +49,7 @@ class PartialObserver:
                     if bdirection:
                         barriers.append(f"There is a barrier to your {bdirection}.")
         if barriers:
-            desc.append(barriers[0])
+            desc.extend(barriers)
 
         desc.append("Unknown territory outside your radius.")
         return " ".join(desc)

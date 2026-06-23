@@ -14,7 +14,7 @@ class ReportGenerator:
         cfg = self.config.get_config().get("report", {})
         return {
             "group_name": cfg.get("group_name", "yanel11"),
-            "students": [],
+            "students": cfg.get("students", []),
             "github_repo": cfg.get(
                 "github_repo", "https://github.com/Nell-Kh/HW06-Dual-AI-agent-race-via-MCP-servers"
             ),
