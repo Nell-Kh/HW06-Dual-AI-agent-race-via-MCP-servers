@@ -8,22 +8,22 @@
   "sub_games": [
     {
       "sub_game_number": 1,
-      "winner": "thief",
-      "num_moves": 25,
-      "cop_score": 5,
-      "thief_score": 10
+      "winner": "cop",
+      "num_moves": 2,
+      "cop_score": 20,
+      "thief_score": 5
     },
     {
       "sub_game_number": 2,
       "winner": "cop",
-      "num_moves": 9,
+      "num_moves": 4,
       "cop_score": 20,
       "thief_score": 5
     },
     {
       "sub_game_number": 3,
       "winner": "cop",
-      "num_moves": 14,
+      "num_moves": 10,
       "cop_score": 20,
       "thief_score": 5
     },
@@ -36,21 +36,21 @@
     },
     {
       "sub_game_number": 5,
-      "winner": "cop",
-      "num_moves": 6,
-      "cop_score": 20,
-      "thief_score": 5
-    },
-    {
-      "sub_game_number": 6,
       "winner": "thief",
       "num_moves": 25,
       "cop_score": 5,
       "thief_score": 10
+    },
+    {
+      "sub_game_number": 6,
+      "winner": "cop",
+      "num_moves": 2,
+      "cop_score": 20,
+      "thief_score": 5
     }
   ],
   "totals": {
-    "cop": 90,
-    "thief": 40
+    "cop": 105,
+    "thief": 35
   }
 }

@@ -124,8 +124,9 @@ class Orchestrator:
 
         if action == "place_barrier" and agent_name == "cop" and self.barriers_remaining > 0:
             self.barriers_remaining -= 1
-            if game.cop.row > 0 and not game.grid.is_barrier(game.cop.row - 1, game.cop.col):
-                game.grid.place_barrier(game.cop.row - 1, game.cop.col)
+            row, col = game.cop.row, game.cop.col
+            if not game.grid.is_barrier(row, col):
+                game.grid.place_barrier(row, col)
         else:
             dr, dc = {"up": (-1, 0), "down": (1, 0), "left": (0, -1), "right": (0, 1)}.get(
                 action, (0, 0)
