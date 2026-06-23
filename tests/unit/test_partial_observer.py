@@ -38,8 +38,7 @@ def test_generate_description_movement(mock_config):
     grid = Grid(mock_config)
 
     desc = obs.generate_description("cop", grid, (2, 2), (2, 4))
-    assert "movement 2 steps east" in desc
-    assert "cannot confirm position" in desc
+    assert "2 steps east from you" in desc
 
 
 def test_generate_description_barrier(mock_config):
@@ -56,4 +55,4 @@ def test_generate_description_outside_radius(mock_config):
     grid = Grid(mock_config)
 
     desc = obs.generate_description("cop", grid, (0, 0), (4, 4))
-    assert "You cannot confirm opponent position" in desc
+    assert "No sign of the opponent within your view." in desc

@@ -34,10 +34,10 @@ class PartialObserver:
             dir_r = "south" if r2 > r1 else "north" if r2 < r1 else ""
             dir_c = "east" if c2 > c1 else "west" if c2 < c1 else ""
             direction = dir_r + ("-" + dir_c if dir_r and dir_c else dir_c)
-            msg = f"You detect movement {steps} steps {direction} but cannot confirm position."
+            msg = f"You see the opponent {steps} steps {direction} from you."
             desc.append(msg)
         else:
-            desc.append("You cannot confirm opponent position.")
+            desc.append("No sign of the opponent within your view.")
 
         barriers = []
         for r in range(max(0, r1 - self.radius), min(grid.rows, r1 + self.radius + 1)):
@@ -51,5 +51,4 @@ class PartialObserver:
         if barriers:
             desc.extend(barriers)
 
-        desc.append("Unknown territory outside your radius.")
         return " ".join(desc)
