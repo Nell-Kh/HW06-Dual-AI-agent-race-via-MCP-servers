@@ -54,17 +54,17 @@ class Orchestrator:
         moves, max_moves, winner = 0, self.config.get_max_moves(), "timeout"
 
         while moves < max_moves:
+            moves += 1
             for ag, ent, opp, srv in [
                 ("thief", game.thief, game.cop, self.thief_server),
                 ("cop", game.cop, game.thief, self.cop_server),
             ]:
-                self.execute_turn(ag, ent, opp, srv, game, validator, sub_game_number, moves + 1)
+                self.execute_turn(ag, ent, opp, srv, game, validator, sub_game_number, moves)
                 if game.cop.row == game.thief.row and game.cop.col == game.thief.col:
                     winner = "cop"
                     break
             if winner == "cop":
                 break
-            moves += 1
 
         if winner == "timeout":
             winner = "thief"
@@ -133,11 +133,18 @@ class Orchestrator:
         return action
 
     def _build_sub_game_result(self, sub_game_number: int, winner: str, moves: int) -> dict:
-        sc = self.score_manager.get_scores()
+        scoring = self.config.get_config().get("scoring", {})
+        if winner == "cop":
+            cop_score = scoring.get("cop_win", 20)
+            thief_score = scoring.get("thief_loss", 5)
+        else:
+            cop_score = scoring.get("cop_loss", 5)
+            thief_score = scoring.get("thief_win", 10)
+
         return {
             "sub_game_number": sub_game_number,
             "winner": winner,
             "num_moves": moves,
-            "cop_score": sc["cop"],
-            "thief_score": sc["thief"],
+            "cop_score": cop_score,
+            "thief_score": thief_score,
         }

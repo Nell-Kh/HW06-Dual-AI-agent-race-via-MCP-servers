@@ -24,7 +24,8 @@ class GameState:
         while True:
             cr, cc = random.randint(0, rows - 1), random.randint(0, cols - 1)
             tr, tc = random.randint(0, rows - 1), random.randint(0, cols - 1)
-            if cr != tr or cc != tc:
+            manhattan_dist = abs(cr - tr) + abs(cc - tc)
+            if manhattan_dist >= 3:
                 self.cop.move(cr, cc)
                 self.thief.move(tr, tc)
                 break
