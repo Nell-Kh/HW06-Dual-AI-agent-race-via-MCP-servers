@@ -1,6 +1,6 @@
 import json
+from pathlib import Path
 
-from cop_thief.services.html_template import HTML_TEMPLATE
 from cop_thief.shared.config_loader import ConfigLoader
 
 
@@ -38,8 +38,11 @@ class HTMLReplay:
         if not output_path:
             output_path = self.output_path
 
+        template_path = Path(__file__).resolve().parents[3] / "assets" / "replay_template.html"
+        html_template = template_path.read_text(encoding="utf-8")
+
         frames_json = json.dumps(self.frames)
-        html = HTML_TEMPLATE.replace("{rows}", str(self.rows))
+        html = html_template.replace("{rows}", str(self.rows))
         html = html.replace("{cols}", str(self.cols))
         html = html.replace("{frames_json}", frames_json)
 
