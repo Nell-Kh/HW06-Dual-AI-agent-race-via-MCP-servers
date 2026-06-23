@@ -76,9 +76,9 @@ def test_thief_moves_first_each_turn(mock_gs, mock_te):
     game_instance.grid.cols = 5
     mock_gs.return_value = game_instance
     orch = Orchestrator(*deps)
-    orch.execute_turn = MagicMock(return_value="up")
+    orch.turn_executor.execute_turn = MagicMock(return_value="up")
     orch.run_sub_game(1)
-    calls = orch.execute_turn.call_args_list
+    calls = orch.turn_executor.execute_turn.call_args_list
     assert calls[0][0][0] == "thief"
 
 
@@ -120,7 +120,7 @@ def test_thief_wins_updates_score_correctly(mock_gs, mock_te):
     mock_gs.return_value = game_instance
 
     orch = Orchestrator(*deps)
-    orch.execute_turn = MagicMock(return_value="up")
+    orch.turn_executor.execute_turn = MagicMock(return_value="up")
     res = orch.run_sub_game(1)
 
     score_mgr.record_thief_win.assert_called_once()
@@ -141,7 +141,7 @@ def test_transcript_recorded_each_move(mock_gs):
     game_instance.grid.cols = 5
 
     orch = Orchestrator(*deps)
-    orch.execute_turn(
+    orch.turn_executor.execute_turn(
         "thief", game_instance.thief, game_instance.cop, None, game_instance, MagicMock(), 1, 1
     )
 
@@ -162,7 +162,7 @@ def test_cost_tracked_each_llm_call(mock_gs):
     game_instance.grid.cols = 5
 
     orch = Orchestrator(*deps)
-    orch.execute_turn(
+    orch.turn_executor.execute_turn(
         "thief", game_instance.thief, game_instance.cop, None, game_instance, MagicMock(), 1, 1
     )
 
@@ -183,7 +183,7 @@ def test_partial_observer_used_not_full_board(mock_gs):
     game_instance.grid.cols = 5
 
     orch = Orchestrator(*deps)
-    orch.execute_turn(
+    orch.turn_executor.execute_turn(
         "thief", game_instance.thief, game_instance.cop, None, game_instance, MagicMock(), 1, 1
     )
 

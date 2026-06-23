@@ -1,5 +1,3 @@
-import contextlib
-
 from cop_thief.services.cost_tracker import CostTracker
 from cop_thief.services.game_state import GameState
 from cop_thief.services.html_replay import HTMLReplay
@@ -9,6 +7,7 @@ from cop_thief.services.q_table import QTable
 from cop_thief.services.score_manager import ScoreManager
 from cop_thief.services.training_engine import TrainingEngine
 from cop_thief.services.transcript import TranscriptWriter
+from cop_thief.services.turn_executor import TurnExecutor
 from cop_thief.shared.config_loader import ConfigLoader
 from cop_thief.shared.llm_client import LLMClient
 
@@ -37,10 +36,16 @@ class Orchestrator:
         self.cost_tracker = cost_tracker
         self.transcript_writer = transcript_writer
         self.html_replay = html_replay
-        self.barriers_remaining = config.get_max_barriers()
-        self.cop_history = []
-        self.thief_history = []
-        self.last_dialogue = {"cop": "", "thief": ""}
+
+        self.turn_executor = TurnExecutor(
+            llm_client=llm_client,
+            q_table=q_table,
+            partial_observer=partial_observer,
+            cost_tracker=cost_tracker,
+            transcript_writer=transcript_writer,
+            html_replay=html_replay,
+            config=config,
+        )
 
     def run_game(self) -> dict:
         trainer = TrainingEngine(self.config, self.q_table)
@@ -58,10 +63,7 @@ class Orchestrator:
         game = GameState(self.config)
         game.reset_for_sub_game()
         validator = MoveValidator(game.grid)
-        self.barriers_remaining = self.config.get_max_barriers()
-        self.cop_history = []
-        self.thief_history = []
-        self.last_dialogue = {"cop": "", "thief": ""}
+        self.turn_executor.reset()
         moves, max_moves, winner = 0, self.config.get_max_moves(), "timeout"
 
         while moves < max_moves:
@@ -70,7 +72,9 @@ class Orchestrator:
                 ("thief", game.thief, game.cop, self.thief_server),
                 ("cop", game.cop, game.thief, self.cop_server),
             ]:
-                self.execute_turn(ag, ent, opp, srv, game, validator, sub_game_number, moves)
+                self.turn_executor.execute_turn(
+                    ag, ent, opp, srv, game, validator, sub_game_number, moves
+                )
                 if game.cop.row == game.thief.row and game.cop.col == game.thief.col:
                     winner = "cop"
                     break
@@ -85,90 +89,6 @@ class Orchestrator:
         else:
             self.score_manager.record_thief_win()
         return self._build_sub_game_result(sub_game_number, winner, moves)
-
-    def execute_turn(
-        self,
-        agent_name: str,
-        entity,
-        opponent,
-        mcp_server,
-        game: GameState,
-        validator: MoveValidator,
-        sub_game: int,
-        turn: int,
-    ) -> str:
-        pos, opp_pos = (entity.row, entity.col), (opponent.row, opponent.col)
-        obs = self.partial_observer.generate_description(agent_name, game.grid, pos, opp_pos)
-        valid_moves = validator.get_valid_moves(entity)
-
-        g_sz = [game.grid.rows, game.grid.cols]
-        c_pos, t_pos = (game.cop.row, game.cop.col), (game.thief.row, game.thief.col)
-        state_int_before = self.q_table.encode_state(c_pos, t_pos, g_sz)
-
-        history = self.cop_history if agent_name == "cop" else self.thief_history
-
-        if agent_name == "cop":
-            result = self.llm_client.generate_barrier_decision(
-                obs, valid_moves, self.barriers_remaining, history
-            )
-        else:
-            result = self.llm_client.generate_move(agent_name, obs, valid_moves, history)
-
-        action = result["action"]
-        self.cost_tracker.record_call(
-            result["prompt_tokens"], result["completion_tokens"], result["model"]
-        )
-        self.transcript_writer.record_move(
-            sub_game, turn, agent_name, obs, action, result["dialogue"]
-        )
-        self.html_replay.add_frame(
-            sub_game,
-            turn,
-            agent_name,
-            (game.cop.row, game.cop.col),
-            (game.thief.row, game.thief.col),
-            game.grid.get_barriers(),
-            action,
-            result["dialogue"],
-        )
-
-        if action == "place_barrier" and agent_name == "cop" and self.barriers_remaining > 0:
-            self.barriers_remaining -= 1
-            row, col = game.cop.row, game.cop.col
-            if not game.grid.is_barrier(row, col):
-                game.grid.place_barrier(row, col)
-        elif action != "place_barrier":
-            with contextlib.suppress(ValueError):
-                validator.apply_move(entity, action)
-
-        c_pos, t_pos = (game.cop.row, game.cop.col), (game.thief.row, game.thief.col)
-        caught = c_pos == t_pos
-        state_int_after = self.q_table.encode_state(c_pos, t_pos, g_sz)
-        # Only update Q-table for movement actions, not barrier placement
-        if action in (
-            "up", "down", "left", "right",
-            "up-left", "up-right", "down-left", "down-right"
-        ):
-            self.q_table.update_bellman(
-                state_int_before, action, 10 if caught else -1, state_int_after, caught
-            )
-
-        opponent_name = "thief" if agent_name == "cop" else "cop"
-        opp_msg = self.last_dialogue.get(opponent_name, "")
-        entry = f"T{turn}: I moved {action} | saw {obs} | opponent said: '{opp_msg}'"
-
-        if agent_name == "cop":
-            self.cop_history.append(entry)
-            if len(self.cop_history) > 4:
-                self.cop_history.pop(0)
-            self.last_dialogue["cop"] = result["dialogue"]
-        else:
-            self.thief_history.append(entry)
-            if len(self.thief_history) > 4:
-                self.thief_history.pop(0)
-            self.last_dialogue["thief"] = result["dialogue"]
-
-        return action
 
     def _build_sub_game_result(self, sub_game_number: int, winner: str, moves: int) -> dict:
         scoring = self.config.get_config().get("scoring", {})
