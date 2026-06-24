@@ -2,18 +2,15 @@ class SweepPlanner:
     def __init__(self):
         self.step = 0
         self.plan = [
-            "place_barrier", "down",
-            "place_barrier", "down",
-            "place_barrier", "down",
+            "place_barrier",
+            "down", "place_barrier",
+            "down", "place_barrier",
             "down",
             "right",
-            "up", "up", "up", "up",
-            "right",
-            "down", "down", "down", "down",
-            "left", "left", "left",
-            "up", "up", "up", "up",
-            "left",
-            "down", "down", "down", "down",
+            "up", "up",
+            "down", "down",
+            "left", "left",
+            "up", "up",
         ]
 
     def reset(self) -> None:
