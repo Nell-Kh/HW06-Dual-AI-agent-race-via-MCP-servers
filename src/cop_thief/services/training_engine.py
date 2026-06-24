@@ -1,5 +1,6 @@
 import json
 import os
+import random
 
 from cop_thief.services.game_state import GameState
 from cop_thief.services.manhattan import ManhattanHeuristic
@@ -43,9 +44,26 @@ class TrainingEngine:
                 cop_pos = (game.cop.row, game.cop.col)
                 thief_pos = (game.thief.row, game.thief.col)
                 grid_size = [game.grid.rows, game.grid.cols]
-                state_int = self.q_table.encode_state(cop_pos, thief_pos, grid_size)
 
-                valid_actions = validator.get_valid_moves(game.cop)
+                valid_cop_actions = validator.get_valid_moves(game.cop)
+                if valid_cop_actions:
+                    if random.random() < 0.5:
+                        cop_action = heuristic.get_best_cop_move(game.cop, game.thief, validator)
+                    else:
+                        cop_action = random.choice(valid_cop_actions)
+                    if cop_action:
+                        dr, dc = validator._get_delta(cop_action)
+                        game.cop.move(game.cop.row + dr, game.cop.col + dc)
+
+                new_cop_pos = (game.cop.row, game.cop.col)
+                
+                if game.cop.row == game.thief.row and game.cop.col == game.thief.col:
+                    moves += 1
+                    break
+
+                state_int = self.q_table.encode_state(new_cop_pos, thief_pos, grid_size)
+
+                valid_actions = validator.get_valid_moves(game.thief)
                 if not valid_actions:
                     break
 
@@ -54,11 +72,11 @@ class TrainingEngine:
                 )
 
                 dr, dc = validator._get_delta(action)
-                game.cop.move(game.cop.row + dr, game.cop.col + dc)
+                game.thief.move(game.thief.row + dr, game.thief.col + dc)
 
-                new_cop_pos = (game.cop.row, game.cop.col)
+                new_thief_pos = (game.thief.row, game.thief.col)
                 new_state_int = self.q_table.encode_state(
-                    new_cop_pos, thief_pos, grid_size
+                    new_cop_pos, new_thief_pos, grid_size
                 )
 
                 is_caught = game.cop.row == game.thief.row and game.cop.col == game.thief.col
@@ -66,8 +84,8 @@ class TrainingEngine:
                 if is_caught:
                     reward = 10.0
                 else:
-                    dist_before = heuristic.get_distance(cop_pos, thief_pos)
-                    dist_after = heuristic.get_distance(new_cop_pos, thief_pos)
+                    dist_before = heuristic.get_distance(new_cop_pos, thief_pos)
+                    dist_after = heuristic.get_distance(new_cop_pos, new_thief_pos)
                     if dist_after < dist_before:
                         reward = 1.0
                     elif dist_after > dist_before:
