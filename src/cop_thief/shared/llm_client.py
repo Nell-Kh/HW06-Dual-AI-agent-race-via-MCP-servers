@@ -21,7 +21,8 @@ class LLMClient:
         self.prompt_builder = PromptBuilder(self.cop_persona, self.thief_persona)
 
     def generate_move(
-        self, agent_name: str, observation: str, valid_moves: list[str], game_history: list[str]
+        self, agent_name: str, observation: str, valid_moves: list[str], game_history: list[str],
+        last_seen: dict | None = None, opponent_message: str = "",
     ) -> dict:
         if not valid_moves:
             return {
@@ -33,11 +34,12 @@ class LLMClient:
             }
         if agent_name == "cop":
             messages = self.prompt_builder.build_cop_prompt(
-                observation, valid_moves, game_history
+                observation, valid_moves, game_history, last_seen=last_seen,
+                opponent_message=opponent_message
             )
         else:
             messages = self.prompt_builder.build_thief_prompt(
-                observation, valid_moves, game_history
+                observation, valid_moves, game_history, last_seen, opponent_message
             )
 
         try:
@@ -73,14 +75,18 @@ class LLMClient:
         valid_moves: list[str],
         barriers_remaining: int,
         history: list[str] | None = None,
+        last_seen: dict | None = None,
+        opponent_message: str = "",
     ) -> dict:
         if history is None:
             history = []
         if barriers_remaining <= 0:
-            return self.generate_move("cop", cop_observation, valid_moves, history)
+            return self.generate_move(
+                "cop", cop_observation, valid_moves, history, last_seen, opponent_message
+            )
 
         messages = self.prompt_builder.build_cop_prompt(
-            cop_observation, valid_moves, history, barriers_remaining
+            cop_observation, valid_moves, history, barriers_remaining, last_seen, opponent_message
         )
         try:
             response = self.gatekeeper.execute(

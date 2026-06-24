@@ -7,12 +7,41 @@ class PromptBuilder:
         self.cop_persona = cop_persona
         self.thief_persona = thief_persona
 
+    def _build_belief_block(self, agent_role: str, last_seen: dict | None, opp_msg: str) -> str:
+        if last_seen is None:
+            if agent_role == "cop":
+                return (
+                    "SEARCH. You haven't spotted the thief. "
+                    "Sweep toward the center to maximize detection."
+                )
+            return "SEARCH. Cop not seen. Move toward an edge/corner to stay hidden."
+
+        ts, st, dr = last_seen["turns_since"], last_seen["steps"], last_seen["direction"]
+        if ts in (1, 2):
+            act = "CLOSE distance" if agent_role == "cop" else "WIDEN distance"
+            return (
+                f"You last saw the opponent {st} steps {dr}, {ts} turn(s) ago — still close, "
+                f"within ~{ts} cells. They said: '{opp_msg}'. Move decisively to {act}."
+            )
+        if ts in (3, 4):
+            act = "toward" if agent_role == "cop" else "away from"
+            return (
+                f"Last saw opponent {st} steps {dr}, {ts} turns ago — could be several cells "
+                f"away now. Move generally {act} that area without over-committing. "
+                f"They said: '{opp_msg}'."
+            )
+
+        act = "sweep toward center." if agent_role == "cop" else "head for farthest corner."
+        return f"Last sighting ({ts} turns ago) is unreliable. {act}"
+
     def build_cop_prompt(
         self,
         observation: str,
         valid_moves: list[str],
         history: list[str],
         barriers_remaining: int = 0,
+        last_seen: dict | None = None,
+        opponent_message: str = "",
     ) -> list[dict]:
         sys_msg = (
             "Role: Cop on 5x5 grid. Strategy: Close distance to thief. Block escape routes. "
@@ -22,15 +51,23 @@ class PromptBuilder:
         user_msg = (
             f"Obs:{observation}\nMoves:{valid_moves}\n"
             f"Goal: Reduce distance to thief (e.g. if north go up, north-east go up-right).\n"
-            f"History:{history}\n"
         )
+        if "No sign" in observation:
+            bb = self._build_belief_block("cop", last_seen, opponent_message)
+            user_msg += f"Belief: {bb}\n"
+        user_msg += f"History:{history}\n"
         if barriers_remaining > 0:
             user_msg += f"Barriers:{barriers_remaining}\n"
 
         return [{"role": "system", "content": sys_msg}, {"role": "user", "content": user_msg}]
 
     def build_thief_prompt(
-        self, observation: str, valid_moves: list[str], history: list[str]
+        self,
+        observation: str,
+        valid_moves: list[str],
+        history: list[str],
+        last_seen: dict | None = None,
+        opponent_message: str = "",
     ) -> list[dict]:
         sys_msg = (
             "Role: Thief on 5x5 grid. Strategy: Maximize distance from cop. Always flee! "
@@ -41,8 +78,11 @@ class PromptBuilder:
             f"Obs:{observation}\nMoves:{valid_moves}\n"
             "Goal: Increase distance from cop (e.g. if cop north, go south. "
             "if north-east, go down-left).\n"
-            f"History:{history}\n"
         )
+        if "No sign" in observation:
+            bb = self._build_belief_block("thief", last_seen, opponent_message)
+            user_msg += f"Belief: {bb}\n"
+        user_msg += f"History:{history}\n"
         return [{"role": "system", "content": sys_msg}, {"role": "user", "content": user_msg}]
 
     def parse_response(self, resp_text: str, valid_moves: list[str]) -> tuple[str, str]:

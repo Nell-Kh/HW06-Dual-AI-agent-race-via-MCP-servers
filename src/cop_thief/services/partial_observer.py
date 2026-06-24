@@ -30,7 +30,7 @@ class PartialObserver:
         dist_c = abs(c1 - c2)
 
         if dist_r <= self.radius and dist_c <= self.radius:
-            steps = dist_r + dist_c
+            steps = max(dist_r, dist_c)
             dir_r = "south" if r2 > r1 else "north" if r2 < r1 else ""
             dir_c = "east" if c2 > c1 else "west" if c2 < c1 else ""
             direction = dir_r + ("-" + dir_c if dir_r and dir_c else dir_c)

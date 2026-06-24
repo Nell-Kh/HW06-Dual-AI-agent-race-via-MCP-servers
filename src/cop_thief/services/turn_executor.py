@@ -74,13 +74,17 @@ class TurnExecutor:
         state_int_before = self.q_table.encode_state(c_pos, t_pos, g_sz)
 
         history = self.cop_history if agent_name == "cop" else self.thief_history
+        ls = self.last_seen[agent_name]
+        opp_msg = self.last_dialogue["thief" if agent_name == "cop" else "cop"]
 
         if agent_name == "cop":
             result = self.llm_client.generate_barrier_decision(
-                obs, valid_moves, self.barriers_remaining, history
+                obs, valid_moves, self.barriers_remaining, history, ls, opp_msg
             )
         else:
-            result = self.llm_client.generate_move(agent_name, obs, valid_moves, history)
+            result = self.llm_client.generate_move(
+                agent_name, obs, valid_moves, history, ls, opp_msg
+            )
 
         return obs, g_sz, state_int_before, result
 
@@ -93,22 +97,14 @@ class TurnExecutor:
             self.last_seen[agent_name]["turns_since"] += 1
 
     def _record_turn(self, sub_game, turn, agent_name, obs, action, result, game):
-        self.cost_tracker.record_call(
-            result["prompt_tokens"], result["completion_tokens"], result["model"]
-        )
+        pt, ct, mod = result["prompt_tokens"], result["completion_tokens"], result["model"]
+        self.cost_tracker.record_call(pt, ct, mod)
         self.transcript_writer.record_move(
             sub_game, turn, agent_name, obs, action, result["dialogue"]
         )
-        self.html_replay.add_frame(
-            sub_game,
-            turn,
-            agent_name,
-            (game.cop.row, game.cop.col),
-            (game.thief.row, game.thief.col),
-            game.grid.get_barriers(),
-            action,
-            result["dialogue"],
-        )
+        c_p, t_p = (game.cop.row, game.cop.col), (game.thief.row, game.thief.col)
+        bars, dlg = game.grid.get_barriers(), result["dialogue"]
+        self.html_replay.add_frame(sub_game, turn, agent_name, c_p, t_p, bars, action, dlg)
 
     def _apply_action(self, action, agent_name, entity, game, validator):
         if action == "place_barrier" and agent_name == "cop" and self.barriers_remaining > 0:
