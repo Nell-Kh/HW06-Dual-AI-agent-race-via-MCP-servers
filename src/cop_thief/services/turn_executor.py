@@ -1,4 +1,5 @@
 import contextlib
+import re
 
 from cop_thief.services.cost_tracker import CostTracker
 from cop_thief.services.game_state import GameState
@@ -30,10 +31,6 @@ class TurnExecutor:
         self.html_replay = html_replay
         self.config = config
 
-        self.barriers_remaining = 0
-        self.cop_history = []
-        self.thief_history = []
-        self.last_dialogue = {"cop": "", "thief": ""}
         self.reset()
 
     def reset(self):
@@ -41,6 +38,7 @@ class TurnExecutor:
         self.cop_history = []
         self.thief_history = []
         self.last_dialogue = {"cop": "", "thief": ""}
+        self.last_seen = {"cop": None, "thief": None}
 
     def execute_turn(
         self,
@@ -68,6 +66,7 @@ class TurnExecutor:
     def _decide_action(self, agent_name, entity, opponent, game, validator):
         pos, opp_pos = (entity.row, entity.col), (opponent.row, opponent.col)
         obs = self.partial_observer.generate_description(agent_name, game.grid, pos, opp_pos)
+        self._update_belief_state(agent_name, obs)
         valid_moves = validator.get_valid_moves(entity)
 
         g_sz = [game.grid.rows, game.grid.cols]
@@ -84,6 +83,14 @@ class TurnExecutor:
             result = self.llm_client.generate_move(agent_name, obs, valid_moves, history)
 
         return obs, g_sz, state_int_before, result
+
+    def _update_belief_state(self, agent_name, obs):
+        if "You see the opponent" in obs and (m := re.search(r"(\d+) steps ([a-z-]+)", obs)):
+            self.last_seen[agent_name] = {
+                "direction": m.group(2), "steps": int(m.group(1)), "turns_since": 0
+            }
+        elif "No sign" in obs and self.last_seen[agent_name]:
+            self.last_seen[agent_name]["turns_since"] += 1
 
     def _record_turn(self, sub_game, turn, agent_name, obs, action, result, game):
         self.cost_tracker.record_call(
