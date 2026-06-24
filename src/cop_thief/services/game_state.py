@@ -20,9 +20,15 @@ class GameState:
         self.grid.reset()
         self.turn_count = 0
         rows, cols = self.config.get_grid_size()
+        agent_conf = self.config._config.get("agents", {})
+        cop_start = agent_conf.get("cop_start_pos")
 
         while True:
-            cr, cc = random.randint(0, rows - 1), random.randint(0, cols - 1)
+            if cop_start:
+                cr, cc = cop_start[0], cop_start[1]
+            else:
+                cr, cc = random.randint(0, rows - 1), random.randint(0, cols - 1)
+
             tr, tc = random.randint(0, rows - 1), random.randint(0, cols - 1)
             manhattan_dist = abs(cr - tr) + abs(cc - tc)
             if manhattan_dist >= 3:

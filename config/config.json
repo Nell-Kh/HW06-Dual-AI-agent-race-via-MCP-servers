@@ -12,7 +12,8 @@
   },
   "agents": {
     "cop_start": "random",
-    "thief_start": "random"
+    "thief_start": "random",
+    "cop_start_pos": [0, 2]
   },
   "llm": {
     "provider": "openai",

@@ -1,12 +1,14 @@
 import contextlib
 import re
 
+from cop_thief.services.corner_planner import CornerPlanner
 from cop_thief.services.cost_tracker import CostTracker
 from cop_thief.services.game_state import GameState
 from cop_thief.services.html_replay import HTMLReplay
 from cop_thief.services.move_validator import MoveValidator
 from cop_thief.services.partial_observer import PartialObserver
 from cop_thief.services.q_table import QTable
+from cop_thief.services.sweep_planner import SweepPlanner
 from cop_thief.services.transcript import TranscriptWriter
 from cop_thief.shared.config_loader import ConfigLoader
 from cop_thief.shared.llm_client import LLMClient
@@ -30,6 +32,8 @@ class TurnExecutor:
         self.transcript_writer = transcript_writer
         self.html_replay = html_replay
         self.config = config
+        self.sweep_planner = SweepPlanner()
+        self.corner_planner = CornerPlanner()
 
         self.reset()
 
@@ -39,6 +43,8 @@ class TurnExecutor:
         self.thief_history = []
         self.last_dialogue = {"cop": "", "thief": ""}
         self.last_seen = {"cop": None, "thief": None}
+        self.sweep_planner.reset()
+        self.corner_planner.reset()
 
     def execute_turn(
         self,
@@ -78,14 +84,22 @@ class TurnExecutor:
         opp_msg = self.last_dialogue["thief" if agent_name == "cop" else "cop"]
 
         if agent_name == "cop":
+            cop_pos = (game.cop.row, game.cop.col)
+            thief_pos = (game.thief.row, game.thief.col)
+            planned_action = self.sweep_planner.next_action(
+                cop_pos, valid_moves, self.barriers_remaining, opponent_pos=thief_pos
+            )
             result = self.llm_client.generate_barrier_decision(
                 obs, valid_moves, self.barriers_remaining, history, ls, opp_msg
             )
         else:
+            thief_pos = (game.thief.row, game.thief.col)
+            planned_action = self.corner_planner.next_action(thief_pos, valid_moves)
             result = self.llm_client.generate_move(
                 agent_name, obs, valid_moves, history, ls, opp_msg
             )
 
+        result["action"] = planned_action
         return obs, g_sz, state_int_before, result
 
     def _update_belief_state(self, agent_name, obs):
