@@ -38,7 +38,10 @@
     "students": ["Nell Khoury"],
     "github_repo": "https://github.com/Nell-Kh/HW06-Dual-AI-agent-race-via-MCP-servers"
   },
-  "vision_radius": 2,
+  "vision_radius": {
+    "cop": 1,
+    "thief": 2
+  },
   "training": {
     "enabled": true,
     "num_episodes": 500,

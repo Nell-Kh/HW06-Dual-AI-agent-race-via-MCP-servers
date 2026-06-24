@@ -17,7 +17,8 @@ def mock_config():
 
 def test_partial_observer_init(mock_config):
     obs = PartialObserver(mock_config)
-    assert obs.radius == 2
+    assert obs._get_radius("cop") == 2
+    assert obs._get_radius("thief") == 2
 
 
 def test_get_visible_state(mock_config):
