@@ -61,7 +61,8 @@ class GameRunner:
             results["sub_games"], scores["cop"], scores["thief"]
         )
         self.report_generator.save_report(report)
-        self.gmail_reporter.send_report(report)
+        email_success = self.gmail_reporter.send_report(report)
+        results["email_success"] = email_success
         self.html_replay.generate_html()
 
         return results

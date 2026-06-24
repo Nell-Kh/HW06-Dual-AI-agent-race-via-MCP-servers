@@ -12,7 +12,11 @@ def main():
     print(f"Final scores: {results['final_scores']}")
     print("Transcript saved to results/transcript.jsonl")
     print("Cost report saved to results/cost_report.json")
-    print("Report emailed to rmisegal+uoh26b@gmail.com")
+    recipient = sdk.game_runner.gmail_reporter.recipient
+    if results.get("email_success", False):
+        print(f"Report emailed to {recipient}")
+    else:
+        print(f"Report FAILED to send to {recipient}")
 
 
 if __name__ == "__main__":
