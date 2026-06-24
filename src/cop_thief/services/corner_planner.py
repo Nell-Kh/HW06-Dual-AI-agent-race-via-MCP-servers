@@ -20,11 +20,28 @@ class CornerPlanner:
 
         tr, tc = self.target
 
+        if (r, c) == self.target:
+            # Stay in corner — pick the move with smallest Manhattan distance back to target
+            best = valid_moves[0] if valid_moves else "up"
+            best_dist = float("inf")
+            deltas = {
+                "up": (-1, 0), "down": (1, 0), "left": (0, -1), "right": (0, 1),
+                "up-left": (-1, -1), "up-right": (-1, 1), "down-left": (1, -1), "down-right": (1, 1)
+            }
+            for m in valid_moves:
+                dr, dc = deltas.get(m, (0, 0))
+                d = abs((r + dr) - tr) + abs((c + dc) - tc)
+                if d < best_dist:
+                    best_dist = d
+                    best = m
+            return best
         dir_r = "down" if tr > r else "up" if tr < r else ""
         dir_c = "right" if tc > c else "left" if tc < c else ""
         desired = dir_r + ("-" + dir_c if dir_r and dir_c else dir_c)
         if not desired:
-            desired = valid_moves[0] if valid_moves else "up"
+            # Already at target corner — pick any valid move that doesn't leave the corner,
+            # or just stay by picking the first valid move (move validator prevents out-of-bounds)
+            return valid_moves[0] if valid_moves else "up"
 
         if desired in valid_moves:
             return desired
