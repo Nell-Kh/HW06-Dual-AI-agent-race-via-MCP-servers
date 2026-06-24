@@ -77,6 +77,16 @@ class Orchestrator:
                 )
                 if game.cop.row == game.thief.row and game.cop.col == game.thief.col:
                     winner = "cop"
+                    self.html_replay.add_frame(
+                        sub_game=sub_game_number,
+                        turn=moves,
+                        agent="System",
+                        cop_pos=(game.cop.row, game.cop.col),
+                        thief_pos=(game.thief.row, game.thief.col),
+                        barriers=game.grid.get_barriers(),
+                        action="game_over",
+                        dialogue="Busted! The Cop caught the Thief!",
+                    )
                     break
             if winner == "cop":
                 break

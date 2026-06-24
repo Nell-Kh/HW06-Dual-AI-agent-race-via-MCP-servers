@@ -26,12 +26,26 @@ class SweepPlanner:
         if opponent_pos:
             r1, c1 = current_pos
             r2, c2 = opponent_pos
-            if abs(r1 - r2) <= 1 and abs(c1 - c2) <= 1 and (r1 != r2 or c1 != c2):
-                dir_r = "down" if r2 > r1 else "up" if r2 < r1 else ""
-                dir_c = "right" if c2 > c1 else "left" if c2 < c1 else ""
-                desired = dir_r + ("-" + dir_c if dir_r and dir_c else dir_c)
-                if desired in valid_moves:
-                    return desired
+            if max(abs(r1 - r2), abs(c1 - c2)) <= 1 and (r1 != r2 or c1 != c2):
+                best = valid_moves[0] if valid_moves else "up"
+                best_dist = float("inf")
+                deltas = {
+                    "up": (-1, 0),
+                    "down": (1, 0),
+                    "left": (0, -1),
+                    "right": (0, 1),
+                    "up-left": (-1, -1),
+                    "up-right": (-1, 1),
+                    "down-left": (1, -1),
+                    "down-right": (1, 1),
+                }
+                for m in valid_moves:
+                    dr, dc = deltas.get(m, (0, 0))
+                    d = abs((r1 + dr) - r2) + abs((c1 + dc) - c2)
+                    if d < best_dist:
+                        best_dist = d
+                        best = m
+                return best
 
         if self.step >= len(self.plan):
             return valid_moves[0] if valid_moves else "up"

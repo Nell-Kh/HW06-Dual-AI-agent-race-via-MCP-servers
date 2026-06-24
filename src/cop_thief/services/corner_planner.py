@@ -5,8 +5,35 @@ class CornerPlanner:
     def reset(self) -> None:
         self.target = None
 
-    def next_action(self, current_pos: tuple[int, int], valid_moves: list[str]) -> str:
+    def next_action(
+        self,
+        current_pos: tuple[int, int],
+        valid_moves: list[str],
+        opponent_pos: tuple[int, int] | None = None,
+    ) -> str:
         r, c = current_pos
+        if opponent_pos:
+            r2, c2 = opponent_pos
+            if max(abs(r - r2), abs(c - c2)) <= 2:
+                best = valid_moves[0] if valid_moves else "up"
+                best_dist = -1
+                deltas = {
+                    "up": (-1, 0),
+                    "down": (1, 0),
+                    "left": (0, -1),
+                    "right": (0, 1),
+                    "up-left": (-1, -1),
+                    "up-right": (-1, 1),
+                    "down-left": (1, -1),
+                    "down-right": (1, 1),
+                }
+                for m in valid_moves:
+                    dr, dc = deltas.get(m, (0, 0))
+                    d = abs((r + dr) - r2) + abs((c + dc) - c2)
+                    if d > best_dist:
+                        best_dist = d
+                        best = m
+                return best
         if self.target is None:
             corners = [(0, 0), (0, 4), (4, 0), (4, 4)]
             best_corner = corners[0]

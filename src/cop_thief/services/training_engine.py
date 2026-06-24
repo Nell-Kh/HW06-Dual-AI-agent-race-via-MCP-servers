@@ -41,7 +41,6 @@ class TrainingEngine:
 
             moves = 0
             while moves < self.config.get_max_moves():
-                cop_pos = (game.cop.row, game.cop.col)
                 thief_pos = (game.thief.row, game.thief.col)
                 grid_size = [game.grid.rows, game.grid.cols]
 
@@ -56,7 +55,7 @@ class TrainingEngine:
                         game.cop.move(game.cop.row + dr, game.cop.col + dc)
 
                 new_cop_pos = (game.cop.row, game.cop.col)
-                
+
                 if game.cop.row == game.thief.row and game.cop.col == game.thief.col:
                     moves += 1
                     break

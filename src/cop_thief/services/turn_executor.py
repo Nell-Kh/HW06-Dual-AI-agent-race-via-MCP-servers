@@ -16,14 +16,9 @@ from cop_thief.shared.llm_client import LLMClient
 
 class TurnExecutor:
     def __init__(
-        self,
-        llm_client: LLMClient,
-        q_table: QTable,
-        partial_observer: PartialObserver,
-        cost_tracker: CostTracker,
-        transcript_writer: TranscriptWriter,
-        html_replay: HTMLReplay,
-        config: ConfigLoader,
+        self, llm_client: LLMClient, q_table: QTable, partial_observer: PartialObserver,
+        cost_tracker: CostTracker, transcript_writer: TranscriptWriter,
+        html_replay: HTMLReplay, config: ConfigLoader,
     ):
         self.llm_client = llm_client
         self.q_table = q_table
@@ -84,17 +79,16 @@ class TurnExecutor:
         opp_msg = self.last_dialogue["thief" if agent_name == "cop" else "cop"]
 
         if agent_name == "cop":
-            cop_pos = (game.cop.row, game.cop.col)
-            thief_pos = (game.thief.row, game.thief.col)
             planned_action = self.sweep_planner.next_action(
-                cop_pos, valid_moves, self.barriers_remaining, opponent_pos=thief_pos
+                c_pos, valid_moves, self.barriers_remaining, opponent_pos=t_pos
             )
             result = self.llm_client.generate_barrier_decision(
                 obs, valid_moves, self.barriers_remaining, history, ls, opp_msg
             )
         else:
-            thief_pos = (game.thief.row, game.thief.col)
-            planned_action = self.corner_planner.next_action(thief_pos, valid_moves)
+            planned_action = self.corner_planner.next_action(
+                t_pos, valid_moves, opponent_pos=c_pos
+            )
             result = self.llm_client.generate_move(
                 agent_name, obs, valid_moves, history, ls, opp_msg
             )
@@ -107,17 +101,18 @@ class TurnExecutor:
             self.last_seen[agent_name] = {
                 "direction": m.group(2), "steps": int(m.group(1)), "turns_since": 0
             }
-        elif "No sign" in obs and self.last_seen[agent_name]:
-            self.last_seen[agent_name]["turns_since"] += 1
+        elif "No sign" in obs and (ls := self.last_seen[agent_name]):
+            ls["turns_since"] += 1
 
     def _record_turn(self, sub_game, turn, agent_name, obs, action, result, game):
         pt, ct, mod = result["prompt_tokens"], result["completion_tokens"], result["model"]
         self.cost_tracker.record_call(pt, ct, mod)
-        self.transcript_writer.record_move(
-            sub_game, turn, agent_name, obs, action, result["dialogue"]
-        )
+
+        dlg = result["dialogue"]
+        self.transcript_writer.record_move(sub_game, turn, agent_name, obs, action, dlg)
+
         c_p, t_p = (game.cop.row, game.cop.col), (game.thief.row, game.thief.col)
-        bars, dlg = game.grid.get_barriers(), result["dialogue"]
+        bars = game.grid.get_barriers()
         self.html_replay.add_frame(sub_game, turn, agent_name, c_p, t_p, bars, action, dlg)
 
     def _apply_action(self, action, agent_name, entity, game, validator):
@@ -144,17 +139,11 @@ class TurnExecutor:
             )
 
     def _update_history(self, agent_name, action, obs, result, turn):
-        opponent_name = "thief" if agent_name == "cop" else "cop"
-        opp_msg = self.last_dialogue.get(opponent_name, "")
+        opp = "thief" if agent_name == "cop" else "cop"
+        opp_msg = self.last_dialogue.get(opp, '')
         entry = f"T{turn}: I moved {action} | saw {obs} | opponent said: '{opp_msg}'"
-
-        if agent_name == "cop":
-            self.cop_history.append(entry)
-            if len(self.cop_history) > 4:
-                self.cop_history.pop(0)
-            self.last_dialogue["cop"] = result["dialogue"]
-        else:
-            self.thief_history.append(entry)
-            if len(self.thief_history) > 4:
-                self.thief_history.pop(0)
-            self.last_dialogue["thief"] = result["dialogue"]
+        history = self.cop_history if agent_name == "cop" else self.thief_history
+        history.append(entry)
+        if len(history) > 4:
+            history.pop(0)
+        self.last_dialogue[agent_name] = result["dialogue"]
