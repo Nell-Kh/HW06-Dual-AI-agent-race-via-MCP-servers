@@ -1,7 +1,7 @@
 # Product Requirements Document (PRD)
 
 ## 1. Project Overview and the Pursuit Problem
-This project implements a multi-agent Cop-and-Thief pursuit game where two autonomous AI agents communicate in natural language over independent MCP servers. The Cop attempts to catch the Thief on a dynamic 5x5 grid by deducing locations and placing barriers, while the Thief attempts to evade the Cop for a maximum of 25 moves. The system requires orchestrating these interactions locally using Anthropic's Claude as the underlying LLM, establishing a Dec-POMDP (Decentralized Partially Observable Markov Decision Process) environment where agents rely on partial observations.
+This project implements a multi-agent Cop-and-Thief pursuit game where two autonomous AI agents communicate in natural language over independent MCP servers. The Cop attempts to catch the Thief on a dynamic 5x5 grid by deducing locations and placing barriers, while the Thief attempts to evade the Cop for a maximum of 25 moves. The system requires orchestrating these interactions locally using OpenAI's gpt-4o-mini as the underlying LLM, establishing a Dec-POMDP (Decentralized Partially Observable Markov Decision Process) environment where agents rely on partial observations.
 
 ## 2. Full Dec-POMDP Tuple
 The pursuit problem is framed as a Dec-POMDP, defined by the tuple `⟨n, S, {Ai}, P, R, {Ωi}, O, γ⟩`:
@@ -13,11 +13,12 @@ The pursuit problem is framed as a Dec-POMDP, defined by the tuple `⟨n, S, {Ai
 - **{Ωi}**: The partial observation space for each agent (local visibility and natural language messages from the opponent).
 - **O**: The observation function (translating grid state and opponent actions into the prompt/natural language context for the agent).
 - **γ**: The discount factor (used exclusively for the Q-Table Bellman update, not the overall game scoring).
+- **Belief Tracking**: Because observations are partial, each agent maintains a belief about the opponent's location derived from its last sighting and elapsed time (a last_seen record with a turns-since counter). A decay model treats fresh sightings (≤2 turns) as reliable, aging sightings (3–4 turns) as approximate, and stale sightings (≥5 turns) as unreliable, triggering search behavior. This belief, together with the opponent's last natural-language message, forms the agent's decision context.
 
 ## 3. Functional Requirements
 - **Game Engine**: A robust 5x5 grid simulation that tracks entity positions, validates moves (barriers, bounds), and strictly enforces the 25-move limit and 6 sub-game limit.
 - **MCP Servers**: Two independent MCP servers running locally on ports 8001 (Cop) and 8002 (Thief). They must expose tools to read state and execute actions, but not host the LLM themselves.
-- **LLM Integration**: Integration with Anthropic's Cloud API to generate natural language communications and strategic decisions. Keys must be loaded from `.env` only.
+- **LLM Integration**: Integration with OpenAI's Cloud API (gpt-4o-mini) to generate natural language communications and strategic decisions. Keys must be loaded from `.env` only.
 - **Strategy Module**: Implementation of a baseline Manhattan Heuristic and an advanced Q-Table algorithm (updating via Bellman equation).
 - **Gmail Reporter**: Automated sending of a structured JSON report (game statistics and metadata) to `rmisegal+uoh26b@gmail.com` at the conclusion of the 6 sub-games.
 

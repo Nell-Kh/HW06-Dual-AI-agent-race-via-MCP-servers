@@ -7,7 +7,7 @@ graph TD;
     subgraph "Orchestrator Node"
         O[Orchestrator<br/>(Game Loop)]
         GE[Game Engine<br/>(Grid & Rules)]
-        LLM[LLM Client<br/>(Anthropic API)]
+        LLM[LLM Client<br/>(OpenAI API)]
         
         O -->|Manages State| GE
         O -->|Queries Prompts| LLM
@@ -41,7 +41,7 @@ To ensure all business logic is clean and accessible via a single interface, we 
 3. **Phase 2:** Config Loader + Security (Secrets management, strictly no hardcoding)
 4. **Phase 3:** Core Game Engine (5x5 grid, movement validation, limits, barrier logic, and score tracking)
 5. **Phase 4:** Strategy Module (Manhattan Heuristic baseline, transitioning to Tabular Q-Learning)
-6. **Phase 5:** LLM Client + MCP Servers (Anthropic client, robust local API Gatekeeper, Cop and Thief MCP servers)
+6. **Phase 5:** LLM Client + MCP Servers (OpenAI client, robust local API Gatekeeper, Cop and Thief MCP servers)
 7. **Phase 6:** Orchestrator + Game Runner (Coordinating the 6 sub-games, mapping tools, prompt routing)
 8. **Phase 7:** Gmail Reporter + JSON Output (Auto-emailing structured JSON payload at game completion)
 9. **Phase 8:** Research, Analysis, Final Polish (Jupyter Notebooks, visual graphs, 85% coverage verify, ruff enforce)
@@ -55,7 +55,7 @@ To ensure all business logic is clean and accessible via a single interface, we 
 ## 5. Excellence Features (Phase 9)
 
 ### 1. PartialObserver
-Each agent has a `vision_radius` (default 2 from config). Agents only see cells within their radius. Outside radius = unknown. The `observe()` tool returns natural language describing only what is visible: "You are at center. You detect movement 2 steps east but cannot confirm position. There is a barrier to your south. Unknown territory to your north."
+Each agent has a `vision_radius` (default 2 from config). Agents only see cells within their radius. Outside radius = unknown. The `observe()` tool returns natural language describing only what is visible: "You are at center. You see the opponent 2 steps east from you. There is a barrier to your south." (or, when the opponent is out of range: "You are at center. No sign of the opponent within your view.")
 
 ### 2. TrainingEngine
 Runs N headless simulations (no LLM, heuristic only) BEFORE the real 6 LLM games, to pre-train the Q-Table. Saves trained table to `results/q_table_trained.npy`. Training results saved to `results/training_log.jsonl`.
@@ -79,7 +79,7 @@ Generates `results/replay.html` after game ends:
 - Play/Pause/Step buttons
 - shows agent dialogue next to grid for each move
 
-### 6. SensitivityAnalyzer
+### 6. SensitivityAnalyzer (PLANNED — research notebook phase, not yet implemented)
 In the research notebook:
 - sweeps learning_rate [0.01, 0.1, 0.3, 0.5] vs win_rate
 - sweeps discount_factor [0.7, 0.8, 0.9, 0.99] vs win_rate
