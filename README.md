@@ -98,16 +98,17 @@ flowchart TD
     T2[Turn 2: Move Down to 1,2] --> T3
     T3[Turn 3: Place Barrier at 1,2] --> T4
     T4[Turn 4: Move Down to 2,2] --> T5
-    T5[Turn 5: Place Barrier at 2,2] --> Wall
+    T5[Turn 5: Place Barrier at 2,2] --> T6
     
-    Wall{Wall Complete! Map is split} --> W1
+    T6[Turn 6: Move Down to 3,2] --> T7
     
-    W1[Turns 6-8: Move Right and Down to Waypoint 3,3] --> W2
-    W2[Turns 9-11: Move Left to Waypoint 1,3] --> W3
-    W3[Turns 12-14: Move Right and Up to Waypoint 3,1] --> W4
-    W4[Turns 15-17: Move Left to Waypoint 1,1] --> Loop
+    T7[Turn 7: Move Right to 3,3] --> T8
+    T8[Turns 8-9: Move Up to 1,3] --> T10
+    T10[Turns 10-11: Move Down to 3,3] --> T12
+    T12[Turns 12-13: Move Left to 3,1] --> T14
+    T14[Turns 14-15: Move Up to 1,1] --> Loop
     
-    Loop((Loop continuously until Caught)) --> W1
+    Loop((End of deterministic patrol))
 ```
 
 ### Cop 2: The Chaos Probabilistic Patroller
@@ -249,12 +250,12 @@ Every time the pipeline finishes, it outputs a highly stylized, cinematic HTML r
 **Cop 1: The 3-Barrier Figure-8 Sweep in Action**
 Watch the deterministic Cop 1 perfectly lock down the grid and execute its mathematical sweep to corner the Ghost Thief!
 
-![Cop 1 Sweep Video](assets/cop1_sweep.gif)
+![Cop 1 Sweep Video](https://github.com/Nell-Kh/HW06-Dual-AI-agent-race-via-MCP-servers/blob/main/assets/cop1_sweep.gif?raw=true)
 
 **Cop 2: The Chaos Patroller in Action**
 Watch Cop 2 utilize pure probability and LLM intuition to outmaneuver the Ghost Thief dynamically without a deterministic algorithm!
 
-![Cop 2 Chaos Video](assets/cop2_chaos.gif)
+![Cop 2 Chaos Video](https://github.com/Nell-Kh/HW06-Dual-AI-agent-race-via-MCP-servers/blob/main/assets/cop2_chaos.gif?raw=true)
 
 ---
 
