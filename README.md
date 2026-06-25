@@ -249,12 +249,12 @@ Every time the pipeline finishes, it outputs a highly stylized, cinematic HTML r
 **Cop 1: The 3-Barrier Figure-8 Sweep in Action**
 Watch the deterministic Cop 1 perfectly lock down the grid and execute its mathematical sweep to corner the Ghost Thief!
 
-![Cop 1 Sweep Video](assets/cop1_sweep.gif)
+<img src="https://github.com/Nell-Kh/HW06-Dual-AI-agent-race-via-MCP-servers/raw/main/assets/cop1_sweep.gif" alt="Cop 1 Sweep Video" width="800">
 
 **Cop 2: The Chaos Patroller in Action**
 Watch Cop 2 utilize pure probability and LLM intuition to outmaneuver the Ghost Thief dynamically without a deterministic algorithm!
 
-![Cop 2 Chaos Video](assets/cop2_chaos.gif)
+<img src="https://github.com/Nell-Kh/HW06-Dual-AI-agent-race-via-MCP-servers/raw/main/assets/cop2_chaos.gif" alt="Cop 2 Chaos Video" width="800">
 
 ---
 
