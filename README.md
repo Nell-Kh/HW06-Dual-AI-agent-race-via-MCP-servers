@@ -102,10 +102,10 @@ flowchart TD
     
     Wall{Wall Complete! Map is split} --> W1
     
-    W1[Turn 6+: Move to Waypoint 3,3] --> W2
-    W2[Move to Waypoint 1,3] --> W3
-    W3[Move to Waypoint 3,1] --> W4
-    W4[Move to Waypoint 1,1] --> Loop
+    W1[Turns 6-8: Move Right and Down to Waypoint 3,3] --> W2
+    W2[Turns 9-11: Move Left to Waypoint 1,3] --> W3
+    W3[Turns 12-14: Move Right and Up to Waypoint 3,1] --> W4
+    W4[Turns 15-17: Move Left to Waypoint 1,1] --> Loop
     
     Loop((Loop continuously until Caught)) --> W1
 ```
