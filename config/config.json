@@ -7,7 +7,7 @@
   "max_moves": 25,
   "num_games": 6,
   "max_barriers": 5,
-  "use_sweep_cop": false,
+  "use_sweep_cop": true,
   "scoring": {
     "cop_win": 20,
     "thief_win": 10,

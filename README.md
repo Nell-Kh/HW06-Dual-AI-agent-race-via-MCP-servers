@@ -226,15 +226,7 @@ Every time the pipeline finishes, it outputs a highly stylized, cinematic HTML r
 - Visual barrier blocks rendering dynamically on the DOM.
 - A dedicated Dialogue Box that renders the LLM-generated quips like a comic book.
 
-### Screenshots of the UI
-
-**The Grid View**
-A pristine look at the 5x5 arena before the chase begins.
-![Grid View](assets/media__1782370796074.png)
-
-**Dynamic Dialogue**
-Agents taunt each other! The LLM reads the opponent's message and responds directly to it, rendered beautifully beneath the grid.
-![Dialogue View](assets/media__1782370796094.png)
+*(A video demonstration of the UI dashboard will be provided upon the final submission run).*
 
 ---
 
