@@ -250,14 +250,18 @@ Every time the pipeline finishes, it outputs a highly stylized, cinematic HTML r
 **Cop 1: The 3-Barrier Figure-8 Sweep in Action**
 Watch the deterministic Cop 1 perfectly lock down the grid and execute its mathematical sweep to corner the Ghost Thief!
 
-<img src="assets/cop1_sweep.gif" alt="Cop 1 Sweep Video" width="800" />
+![Cop 1 Sweep Video](assets/cop1_sweep.gif)
+
+[**▶️ Click here to watch the Cop 1 Sweep Video!**](assets/cop1_sweep.gif)
 
 <br>
 
 **Cop 2: The Chaos Patroller in Action**
-Watch Cop 2 utilize pure probability and LLM intuition to outmaneuver the Ghost Thief dynamically without a deterministic algorithm!
+While Cop 1's deterministic sweep guarantees a 100% win rate, Cop 2's probabilistic chaos introduces fatal flaws. Watch this replay where the Ghost Thief successfully outmaneuvers Cop 2 and escapes, proving that a purely probabilistic approach is inferior to a mathematically guaranteed algorithm!
 
-<img src="assets/cop2_chaos.gif" alt="Cop 2 Chaos Video" width="800" />
+![Cop 2 Chaos Video](assets/cop2_chaos.gif)
+
+[**▶️ Click here to watch the Cop 2 Chaos Video!**](assets/cop2_chaos.gif)
 
 ---
 
