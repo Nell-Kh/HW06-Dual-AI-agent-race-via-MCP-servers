@@ -91,20 +91,23 @@ Since the Cop's legal vision radius is a Chebyshev distance of `1` (which acts a
 By hitting these 4 waypoints, the Cop's radar mathematically scans 100% of the 25 tiles on the grid. There are 0 safe squares. The Thief mathematically cannot evade detection!
 
 ```mermaid
-sequenceDiagram
-    participant C as Cop 1
-    participant G as Grid
-    C->>G: Move to (0,2)
-    C->>G: Action: place_barrier at (0,2)
-    C->>G: Move to (1,2)
-    C->>G: Action: place_barrier at (1,2)
-    C->>G: Move to (2,2)
-    C->>G: Action: place_barrier at (2,2)
-    Note over C,G: The wall restricts movement. Cop begins the Figure-8 Sweep!
-    C->>G: Sweep Waypoint 1: (3,3)
-    C->>G: Sweep Waypoint 2: (1,3)
-    C->>G: Sweep Waypoint 3: (3,1)
-    C->>G: Sweep Waypoint 4: (1,1)
+flowchart TD
+    Start([Game Start: Spawn at 0,2]) --> T1
+    
+    T1[Turn 1: Place Barrier at 0,2] --> T2
+    T2[Turn 2: Move Down to 1,2] --> T3
+    T3[Turn 3: Place Barrier at 1,2] --> T4
+    T4[Turn 4: Move Down to 2,2] --> T5
+    T5[Turn 5: Place Barrier at 2,2] --> Wall
+    
+    Wall{Wall Complete! Map is split} --> W1
+    
+    W1[Turn 6+: Move to Waypoint 3,3] --> W2
+    W2[Move to Waypoint 1,3] --> W3
+    W3[Move to Waypoint 3,1] --> W4
+    W4[Move to Waypoint 1,1] --> Loop
+    
+    Loop((Loop continuously until Caught)) --> W1
 ```
 
 ### Cop 2: The Chaos Probabilistic Patroller
@@ -241,11 +244,54 @@ Every time the pipeline finishes, it outputs a highly stylized, cinematic HTML r
 - Visual barrier blocks rendering dynamically on the DOM.
 - A dedicated Dialogue Box that renders the LLM-generated quips like a comic book.
 
-*(A video demonstration of the UI dashboard will be provided upon the final submission run).*
+### Video Demonstrations
+
+**Cop 1: The 3-Barrier Figure-8 Sweep in Action**
+Watch the deterministic Cop 1 perfectly lock down the grid and execute its mathematical sweep to corner the Ghost Thief!
+
+![Cop 1 Sweep Video](assets/cop1_sweep.gif)
+
+**Cop 2: The Chaos Patroller in Action**
+Watch Cop 2 utilize pure probability and LLM intuition to outmaneuver the Ghost Thief dynamically without a deterministic algorithm!
+
+![Cop 2 Chaos Video](assets/cop2_chaos.gif)
 
 ---
 
-## 10. Setup & Installation Instructions
+## 10. Formal Modeling: Dec-POMDP
+
+The entire AI agent race is formally modeled as a **Decentralized Partially Observable Markov Decision Process (Dec-POMDP)**. The state of the world is defined by the following tuple: `<n, S, {A_i}, P, R, {\Omega_i}, O, \gamma>`
+
+- **$n$**: 2 agents (The Cop and The Thief).
+- **$S$**: The state space. Represents the combination of both agents' grid coordinates (0,0 to 4,4) and the coordinates of all dynamically placed barriers.
+- **$A_i$**: The action space for each agent (Move Up, Down, Left, Right, or Place_Barrier).
+- **$P$**: The transition function. Moving into a barrier or boundary fails deterministically.
+- **$R$**: The reward function. Cop receives +20 for a capture; Thief receives +10 for survival. Negative rewards (-1) are given per step to enforce efficiency.
+- **$\Omega_i$**: The observation space. The Grid is partially observable.
+- **$O$**: The observation function. The agents only receive positional data when within their respective `vision_radius`.
+- **$\gamma$**: The discount factor for reinforcement learning (set to 0.9).
+
+---
+
+## 11. Analysis of Architectural Challenges
+
+A major architectural challenge in this project was deciding how the agents should communicate.
+**Natural Language vs. Strict Protocol:**
+We opted to decouple the agents using the **Model Context Protocol (MCP)** rather than forcing them to parse a strict, hardcoded byte-protocol. By utilizing natural language over `stdio`, the LLMs can reason about the board state intuitively, mock their opponent, and explain their thought process in plain English before generating a JSON payload for the action. While a strict protocol is faster to execute, natural language allows for **Prompt Engineering** to dynamically influence the AI's aggressiveness and pathfinding behavior without rewriting the core Python logic.
+
+---
+
+## 12. Configuration Guide
+
+To comply with professional software standards, **no hardcoded variables** exist in the game logic. All parameters are controlled via `config/config.json`.
+- **`grid_size`**: Default [5, 5]. Dimensions of the board.
+- **`max_moves`**: Default 25. Number of turns before the Thief wins.
+- **`max_barriers`**: Default 5. How many barriers the Cop can drop.
+- **`scoring.cop_win`**: Default 20. Points awarded for a successful capture.
+
+---
+
+## 13. Setup & Installation Instructions
 
 Want to run the Dual-AI Agent Race yourself? It's incredibly easy to deploy.
 
@@ -281,6 +327,13 @@ Want to run the Dual-AI Agent Race yourself? It's incredibly easy to deploy.
    ```
 
 ---
+
+## 14. Contribution Guidelines & License
+
+**Contributions**: Please ensure all code adheres to PEP8 standards. We enforce `ruff` for all linting with a 0-violation policy. Run `uv run ruff check .` before submitting a Pull Request.
+
+**License**: This project is licensed under the MIT License.
+
 <div align="center">
   <i>Built from scratch for the Advanced Agentic AI Course.</i>
   <br>
