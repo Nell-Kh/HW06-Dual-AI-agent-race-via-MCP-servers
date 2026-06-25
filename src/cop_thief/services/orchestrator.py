@@ -45,6 +45,7 @@ class Orchestrator:
             transcript_writer=transcript_writer,
             html_replay=html_replay,
             config=config,
+            use_sweep_cop=self.config.get_config().get("use_sweep_cop", True),
         )
 
     def run_game(self) -> dict:

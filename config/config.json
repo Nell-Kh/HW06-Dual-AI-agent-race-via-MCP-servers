@@ -1,9 +1,13 @@
 {
   "version": "1.00",
-  "grid_size": [5, 5],
+  "grid_size": [
+    5,
+    5
+  ],
   "max_moves": 25,
   "num_games": 6,
   "max_barriers": 5,
+  "use_sweep_cop": false,
   "scoring": {
     "cop_win": 20,
     "thief_win": 10,
@@ -13,7 +17,10 @@
   "agents": {
     "cop_start": "random",
     "thief_start": "random",
-    "cop_start_pos": [0, 2]
+    "cop_start_pos": [
+      0,
+      2
+    ]
   },
   "llm": {
     "provider": "openai",
@@ -36,7 +43,9 @@
     "recipient": "rmisegal+uoh26b@gmail.com",
     "timezone": "Asia/Jerusalem",
     "group_name": "yanel11",
-    "students": ["Nell Khoury"],
+    "students": [
+      "Nell Khoury"
+    ],
     "github_repo": "https://github.com/Nell-Kh/HW06-Dual-AI-agent-race-via-MCP-servers"
   },
   "vision_radius": {

@@ -18,7 +18,7 @@ class TurnExecutor:
     def __init__(
         self, llm_client: LLMClient, q_table: QTable, partial_observer: PartialObserver,
         cost_tracker: CostTracker, transcript_writer: TranscriptWriter,
-        html_replay: HTMLReplay, config: ConfigLoader,
+        html_replay: HTMLReplay, config: ConfigLoader, use_sweep_cop: bool = True
     ):
         self.llm_client = llm_client
         self.q_table = q_table
@@ -27,6 +27,7 @@ class TurnExecutor:
         self.transcript_writer = transcript_writer
         self.html_replay = html_replay
         self.config = config
+        self.use_sweep_cop = use_sweep_cop
         self.sweep_planner = SweepPlanner()
         self.corner_planner = CornerPlanner()
 
@@ -79,9 +80,18 @@ class TurnExecutor:
         opp_msg = self.last_dialogue["thief" if agent_name == "cop" else "cop"]
 
         if agent_name == "cop":
-            planned_action = self.sweep_planner.next_action(
-                c_pos, valid_moves, self.barriers_remaining, opponent_pos=t_pos
-            )
+            if self.use_sweep_cop:
+                planned_action = self.sweep_planner.next_action(
+                    c_pos, valid_moves, self.barriers_remaining, opponent_pos=t_pos
+                )
+            else:
+                from cop_thief.services.wall_builder import WallBuilder
+                if not hasattr(self, "wall_builder"):
+                    self.wall_builder = WallBuilder()
+                planned_action = self.wall_builder.next_action(
+                    c_pos, valid_moves, self.barriers_remaining, opponent_pos=t_pos
+                )
+
             result = self.llm_client.generate_barrier_decision(
                 obs, valid_moves, self.barriers_remaining, history, ls, opp_msg
             )

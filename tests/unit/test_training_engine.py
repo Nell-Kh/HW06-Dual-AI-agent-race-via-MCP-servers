@@ -37,8 +37,10 @@ def test_run_headless_games(mock_game_state_class, mock_config, tmp_path):
     mock_game = MagicMock()
     mock_game.cop.row = 2
     mock_game.cop.col = 2
+    mock_game.cop.get_position.return_value = (2, 2)
     mock_game.thief.row = 0
     mock_game.thief.col = 0
+    mock_game.thief.get_position.return_value = (0, 0)
     mock_game.grid.rows = 5
     mock_game.grid.cols = 5
     mock_game.grid.is_barrier.return_value = False

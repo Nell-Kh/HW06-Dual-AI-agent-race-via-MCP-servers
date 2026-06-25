@@ -46,7 +46,9 @@ class PromptBuilder:
         sys_msg = (
             "Role: Cop on 5x5 grid. Strategy: Close distance to thief. Block escape routes. "
             'Output JSON only: {"action":"up|down|left|right|up-left|up-right|'
-            'down-left|down-right|place_barrier","dialogue":"quip"}'
+            'down-left|down-right|place_barrier","dialogue":"write a highly contextual, '
+            'meaningful, and dramatic sentence addressing the thief based on what you see '
+            'or hear. React specifically to the opponent\'s last message!"}'
         )
         user_msg = (
             f"Obs:{observation}\nMoves:{valid_moves}\n"
@@ -56,6 +58,8 @@ class PromptBuilder:
             bb = self._build_belief_block("cop", last_seen, opponent_message)
             user_msg += f"Belief: {bb}\n"
         user_msg += f"History:{history}\n"
+        if opponent_message:
+            user_msg += f"Opponent Message: '{opponent_message}'\n"
         if barriers_remaining > 0:
             user_msg += f"Barriers:{barriers_remaining}\n"
 
@@ -72,7 +76,9 @@ class PromptBuilder:
         sys_msg = (
             "Role: Thief on 5x5 grid. Strategy: Maximize distance from cop. Always flee! "
             'Output JSON only: {"action":"up|down|left|right|up-left|'
-            'up-right|down-left|down-right","dialogue":"quip"}'
+            'up-right|down-left|down-right","dialogue":"write a highly contextual, '
+            'meaningful, and dramatic sentence taunting or addressing the cop based on what '
+            'you see or hear. React specifically to the opponent\'s last message!"}'
         )
         user_msg = (
             f"Obs:{observation}\nMoves:{valid_moves}\n"
@@ -83,6 +89,8 @@ class PromptBuilder:
             bb = self._build_belief_block("thief", last_seen, opponent_message)
             user_msg += f"Belief: {bb}\n"
         user_msg += f"History:{history}\n"
+        if opponent_message:
+            user_msg += f"Opponent Message: '{opponent_message}'\n"
         return [{"role": "system", "content": sys_msg}, {"role": "user", "content": user_msg}]
 
     def parse_response(self, resp_text: str, valid_moves: list[str]) -> tuple[str, str]:
