@@ -41,6 +41,8 @@ class TurnExecutor:
         self.last_seen = {"cop": None, "thief": None}
         self.sweep_planner.reset()
         self.corner_planner.reset()
+        if hasattr(self, "wall_builder"):
+            self.wall_builder.reset()
 
     def execute_turn(
         self,
