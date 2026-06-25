@@ -79,10 +79,16 @@ Cop 1 is the ultimate flawless hunter. It relies on a strictly deterministic pat
 2. **The Sweep:** The Cop then moves to the left or right half of the grid (the 3x3 trapped zones). It methodically steps through sweeping waypoints.
 
 **The Mathematical Proof of 100% Win-Rate:**
-Because the 5x5 grid is split at Column 2, the trapped zones are exactly 2x5.
-The Cop runs a precise sweep pattern that visits `(0,0)`, `(2,1)`, and `(4,0)`. 
-Since the Cop's legal vision radius is a Chebyshev distance of `1`, standing on `(2,1)` mathematically covers `(1,0)` through `(3,2)`. By executing this 3-point sweep, the maximum distance from the Cop to *any* cell in the trapped 2x5 zone never exceeds 1. 
-Therefore, 100% of the half-grid is perfectly scanned, leaving 0 safe squares. The Thief mathematically cannot evade detection!
+By placing exactly 3 barriers at `(0,2)`, `(1,2)`, and `(2,2)`, the Cop creates a partial wall that severely restricts the Thief's mobility across the top half of the map. 
+
+Instead of trapping itself, the Cop then executes a flawless **Figure-8 Sweep** of the entire 5x5 grid. It navigates to four primary waypoints: `(3,3)`, `(1,3)`, `(3,1)`, and `(1,1)`. 
+Since the Cop's legal vision radius is a Chebyshev distance of `1` (which acts as a 3x3 sight square):
+- Standing at `(3,3)` scans the entire bottom-right.
+- Standing at `(1,3)` scans the entire top-right.
+- Standing at `(3,1)` scans the entire bottom-left.
+- Standing at `(1,1)` scans the entire top-left.
+
+By hitting these 4 waypoints, the Cop's radar mathematically scans 100% of the 25 tiles on the grid. There are 0 safe squares. The Thief mathematically cannot evade detection!
 
 ```mermaid
 sequenceDiagram
@@ -94,7 +100,11 @@ sequenceDiagram
     C->>G: Action: place_barrier at (1,2)
     C->>G: Move to (2,2)
     C->>G: Action: place_barrier at (2,2)
-    Note over C,G: The grid is now split! Cop systematically sweeps the 3x3 halves.
+    Note over C,G: The wall restricts movement. Cop begins the Figure-8 Sweep!
+    C->>G: Sweep Waypoint 1: (3,3)
+    C->>G: Sweep Waypoint 2: (1,3)
+    C->>G: Sweep Waypoint 3: (3,1)
+    C->>G: Sweep Waypoint 4: (1,1)
 ```
 
 ### Cop 2: The Chaos Probabilistic Patroller
